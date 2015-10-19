@@ -1,5 +1,5 @@
 # SWEngTeamY
-This is a group project for CS4380 during Fall 2015 at Mizzou.
+This is a group project for CS4320 during Fall 2015 at Mizzou.
 
 <b>Team Members</b><br/>
 Tyler Brown<br/>
