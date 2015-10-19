@@ -5,7 +5,7 @@ This is a group project for CS4320 during Fall 2015 at Mizzou.
 Tyler Brown<br/>
 Alexes Presswood<br/>
 AJ Stegall<br/>
-Christini Moznick<br/>
+Christina Mosnick<br/>
 Jack Fay<br/>
 James Tapia<br/><br/>
 
