@@ -69,12 +69,15 @@ CREATE TABLE requestedCareerTypes(
 	PRIMARY KEY(appID, id, typeID)
 );
 
-CREATE TABLE admissionsTestRequest(
-
+CREATE TABLE admissionsTestTypes(
+	testID serial PRIMARY KEY, 
+	name varchar(5)
 );
 
 CREATE TABLE admissionsTest(
-
+	admTestID serial PRIMARY KEY,
+	FOREIGN KEY(applicationID) REFERENCES application(appID),
+	FOREIGN KEY(admTypeID) REFERENCES admissionsTestTypes(typeID)
 );
 
 CREATE TABLE roleType(
