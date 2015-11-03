@@ -14,7 +14,7 @@ CREATE TABLE person(
 	pawprint varchar(6),
 	phone_number varchar(10),
 	title varchar(20),
-	FOREIGN KEY(addrID) references address
+	FOREIGN KEY(addrID) references address ON DELETE CASCADE
 );
 
 CREATE TABLE organization(
@@ -23,8 +23,8 @@ CREATE TABLE organization(
 );
 
 CREATE TABLE applicant(
-	FOREIGN KEY(id) REFERENCES person,
-	FOREIGN KEY(organizationID) references organization(orgID),
+	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	FOREIGN KEY(organizationID) references organization(orgID) ON DELETE CASCADE,
 	isStudentWorker boolean,
 	PRIMARY KEY(id)
 );
@@ -35,13 +35,13 @@ CREATE TABLE accessType(
 );
 
 CREATE TABLE applicationProcessor(
-	FOREIGN KEY(id) REFERENCES person,
+	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	jobTitle varchar(15),
 	PRIMARY KEY(id)
 );
 
 CREATE TABLE ferpaScores(
-	FOREIGN KEY(id) REFERENCES person,
+	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	score varchar(2),
 	PRIMARY KEY(id)
 );
@@ -58,14 +58,14 @@ CREATE TABLE applicationTypes(
 
 CREATE TABLE application(
 	appID serial PRIMARY KEY,
-	FOREIGN KEY(id) REFERENCES person,
-	FOREIGN KEY(access_type) REFERENCES applicationTypes
+	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	FOREIGN KEY(access_type) REFERENCES applicationTypes ON DELETE CASCADE
 );
 
 CREATE TABLE requestedCareerTypes(
-	FOREIGN KEY(appID) REFERENCES application,
-	FOREIGN KEY(id) REFERENCES person,
-	FOREIGN KEY(typeID) REFERENCES careerTypes,
+	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
+	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	FOREIGN KEY(typeID) REFERENCES careerTypes ON DELETE CASCADE,
 	PRIMARY KEY(appID, id, typeID)
 );
 
@@ -76,8 +76,8 @@ CREATE TABLE admissionsTestTypes(
 
 CREATE TABLE admissionsTest(
 	admTestID serial PRIMARY KEY,
-	FOREIGN KEY(applicationID) REFERENCES application(appID),
-	FOREIGN KEY(admTypeID) REFERENCES admissionsTestTypes(typeID)
+	FOREIGN KEY(applicationID) REFERENCES application(appID) ON DELETE CASCADE,
+	FOREIGN KEY(admTypeID) REFERENCES admissionsTestTypes(typeID) ON DELETE CASCADE
 );
 
 CREATE TABLE roleType(
@@ -87,7 +87,7 @@ CREATE TABLE roleType(
 
 CREATE TABLE roles(
 	roleID serial PRIMARY KEY,
-	FOREIGN KEY(roleType) REFERENCES roleType(typeID),
+	FOREIGN KEY(roleType) REFERENCES roleType(typeID) ON DELETE CASCADE,
 	roleDesc varchar(150),
 	isViewable boolean, 
 	isUpdateable boolean
@@ -95,8 +95,8 @@ CREATE TABLE roles(
 
 CREATE TABLE roleAccessRequest(
 	roleAccessID serial PRIMARY KEY,
-	FOREIGN KEY(appID) REFERENCES application,
-	FOREIGN KEY(roleID) REFERENCES roles,
+	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
+	FOREIGN KEY(roleID) REFERENCES roles ON DELETE CASCADE,
 	isViewRequest
 	isUpdateRequest
 );
