@@ -11,12 +11,21 @@ CREATE TABLE address(
 DROP TABLE IF EXISTS person;
 CREATE TABLE person(
 	id varchar(8) PRIMARY KEY,
+	addrID serial
 	fname varchar(20),
 	lname varchar(25)
 	pawprint varchar(6),
 	phone_number varchar(10),
 	title varchar(20),
-	FOREIGN KEY(addrID) references address ON DELETE CASCADE
+	FOREIGN KEY(addrID) REFERENCES address ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS authentication;
+CREATE TABLE authentication (
+	id varchar(9) PRIMARY KEY,
+	password_hash CHAR(40) NOT NULL,
+	salt CHAR(40) NOT NULL,
+	FOREIGN KEY (id) REFERENCES person
 );
 
 DROP TABLE IF EXISTS organization;
@@ -27,10 +36,11 @@ CREATE TABLE organization(
 
 DROP TABLE IF EXISTS applicant;
 CREATE TABLE applicant(
+	id serial PRIMARY KEY,
+	organizationID serial,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	FOREIGN KEY(organizationID) references organization(orgID) ON DELETE CASCADE,
-	isStudentWorker boolean,
-	PRIMARY KEY(id)
+	isStudentWorker boolean
 );
 
 DROP TABLE IF EXISTS accessType;
@@ -41,16 +51,16 @@ CREATE TABLE accessType(
 
 DROP TABLE IF EXISTS applicationProcessor;
 CREATE TABLE applicationProcessor(
+	id serial PRIMARY KEY,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
-	jobTitle varchar(15),
-	PRIMARY KEY(id)
+	jobTitle varchar(15)
 );
 
 DROP TABLE IF EXISTS ferpaScores;
 CREATE TABLE ferpaScores(
+	id serial PRIMARY KEY,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
-	score varchar(2),
-	PRIMARY KEY(id)
+	score varchar(2)
 );
 
 DROP TABLE IF EXISTS careerTypes;
@@ -68,12 +78,17 @@ CREATE TABLE applicationTypes(
 DROP TABLE IF EXISTS application;
 CREATE TABLE application(
 	appID serial PRIMARY KEY,
+	id serial, 
+	access_type serial,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
-	FOREIGN KEY(access_type) REFERENCES applicationTypes ON DELETE CASCADE
+	FOREIGN KEY(access_type) REFERENCES applicationTypes(typeID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS requestedCareerTypes;
 CREATE TABLE requestedCareerTypes(
+	appID serial, 
+	id serial,
+	typeID serial,
 	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	FOREIGN KEY(typeID) REFERENCES careerTypes ON DELETE CASCADE,
@@ -89,6 +104,8 @@ CREATE TABLE admissionsTestTypes(
 DROP TABLE IF EXISTS admissionsTest;
 CREATE TABLE admissionsTest(
 	admTestID serial PRIMARY KEY,
+	applicationID serial,
+	admTypeID serial,
 	FOREIGN KEY(applicationID) REFERENCES application(appID) ON DELETE CASCADE,
 	FOREIGN KEY(admTypeID) REFERENCES admissionsTestTypes(typeID) ON DELETE CASCADE
 );
@@ -102,6 +119,7 @@ CREATE TABLE roleType(
 DROP TABLE IF EXISTS roles;
 CREATE TABLE roles(
 	roleID serial PRIMARY KEY,
+	roleType serial,
 	FOREIGN KEY(roleType) REFERENCES roleType(typeID) ON DELETE CASCADE,
 	roleDesc varchar(150),
 	isViewable boolean, 
@@ -111,6 +129,8 @@ CREATE TABLE roles(
 DROP TABLE IF EXISTS roleAccessRequest;
 CREATE TABLE roleAccessRequest(
 	roleAccessID serial PRIMARY KEY,
+	appID serial,
+	roleID serial,
 	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
 	FOREIGN KEY(roleID) REFERENCES roles ON DELETE CASCADE,
 	isViewRequest
