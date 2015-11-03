@@ -6873,10 +6873,10 @@ button.close {
           filter: none;
 }
 .btn-primary {
-  background-image: -webkit-linear-gradient(#8a9196, #7a8288 60%, #70787d);
-  background-image: -o-linear-gradient(#8a9196, #7a8288 60%, #70787d);
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#8a9196), color-stop(60%, #7a8288), to(#70787d));
-  background-image: linear-gradient(#8a9196, #7a8288 60%, #70787d);
+  background-image: -webkit-linear-gradient(#F4BD01, #B38D0C 60%, #564406);
+  background-image: -o-linear-gradient(#F4BD01, #B38D0C 60%, #564406);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#F4BD01), color-stop(60%, #B38D0C), to(#564406));
+  background-image: linear-gradient(#F4BD01, #B38D0C 60%, #564406);
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8a9196', endColorstr='#ff70787d', GradientType=0);
   -webkit-filter: none;
