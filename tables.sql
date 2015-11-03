@@ -11,9 +11,9 @@ CREATE TABLE address(
 DROP TABLE IF EXISTS person;
 CREATE TABLE person(
 	id varchar(8) PRIMARY KEY,
-	addrID serial
+	addrID serial,
 	fname varchar(20),
-	lname varchar(25)
+	lname varchar(25),
 	pawprint varchar(6),
 	phone_number varchar(10),
 	title varchar(20),
@@ -36,7 +36,7 @@ CREATE TABLE organization(
 
 DROP TABLE IF EXISTS applicant;
 CREATE TABLE applicant(
-	id serial PRIMARY KEY,
+	id varchar(9) PRIMARY KEY,
 	organizationID serial,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	FOREIGN KEY(organizationID) references organization(orgID) ON DELETE CASCADE,
@@ -51,14 +51,14 @@ CREATE TABLE accessType(
 
 DROP TABLE IF EXISTS applicationProcessor;
 CREATE TABLE applicationProcessor(
-	id serial PRIMARY KEY,
+	id varchar(9) PRIMARY KEY,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	jobTitle varchar(15)
 );
 
 DROP TABLE IF EXISTS ferpaScores;
 CREATE TABLE ferpaScores(
-	id serial PRIMARY KEY,
+	id varchar(9) PRIMARY KEY,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	score varchar(2)
 );
@@ -78,7 +78,7 @@ CREATE TABLE applicationTypes(
 DROP TABLE IF EXISTS application;
 CREATE TABLE application(
 	appID serial PRIMARY KEY,
-	id serial, 
+	id varchar(9), 
 	access_type serial,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
 	FOREIGN KEY(access_type) REFERENCES applicationTypes(typeID) ON DELETE CASCADE
@@ -87,7 +87,7 @@ CREATE TABLE application(
 DROP TABLE IF EXISTS requestedCareerTypes;
 CREATE TABLE requestedCareerTypes(
 	appID serial, 
-	id serial,
+	id varchar(9),
 	typeID serial,
 	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
 	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
@@ -97,7 +97,7 @@ CREATE TABLE requestedCareerTypes(
 
 DROP TABLE IF EXISTS admissionsTestTypes;
 CREATE TABLE admissionsTestTypes(
-	testID serial PRIMARY KEY, 
+	typeID serial PRIMARY KEY, 
 	name varchar(5)
 );
 
@@ -133,6 +133,6 @@ CREATE TABLE roleAccessRequest(
 	roleID serial,
 	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
 	FOREIGN KEY(roleID) REFERENCES roles ON DELETE CASCADE,
-	isViewRequest
-	isUpdateRequest
+	isViewRequest boolean, 
+	isUpdateRequest boolean
 );
