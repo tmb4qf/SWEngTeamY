@@ -13,3 +13,6 @@ James Tapia<br/><br/>
 Backend: PHP and PostgreSQL<br/>
 Frontend: HTML, CSS, Javascript<br/>
 PaaS: OpenShift<br/>
+
+
+Developers:  branch off of the 'develop' branch and merge back into it at the end of each sprint.  This way we can test our merges in develop before we push out to master.
