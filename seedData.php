@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <?php
 	require "password.php";
-	
-	$employeeID = $_POST['employeeID'];
-	$password = $_POST['pass'];
-	
-	$fname = $_POST['fname'];
-	$lname = $_POST['lname'];
-	$SSO = $_POST['sso'];
-	$phoneNum = $_POST['phone'];
-	$title = $_POST['title'];
-	$addrID = $_POST['addrID'];
-	
-	$street = $_POST['street'];
-	$city = $_POST['city'];
-	$state = $_POST['state'];
-	$country = $_POST['county'];
-	$zipCode = $_POST['zip'];
-	
-	$orgID = $_POST['orgID'];
-	$studentWorker = $_POST['studentWorker'];
-	
-	$jobTitle = $_POST['jobTitle'];
-	
-	$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-	
-	//connection string to db
-	//query to add user info to db
+	if(isset($_POST['submit'])){
+		$employeeID = $_POST['employeeID'];
+		$password = $_POST['pass'];
+		
+		$fname = $_POST['fname'];
+		$lname = $_POST['lname'];
+		$SSO = $_POST['sso'];
+		$phoneNum = $_POST['phone'];
+		$title = $_POST['title'];
+		$addrID = $_POST['addrID'];
+		
+		$street = $_POST['street'];
+		$city = $_POST['city'];
+		$state = $_POST['state'];
+		$country = $_POST['country'];
+		$zipCode = $_POST['zip'];
+		
+		$orgID = $_POST['orgID'];
+		$studentWorker = $_POST['studentWorker'];
+		
+		$jobTitle = $_POST['jobTitle'];
+		
+		$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+		//connection string to db
+		//query to add user info to db
+	}
 ?>
 <html>
 	<head>
@@ -63,7 +64,7 @@
 			
 			<h1>Application Processor</h1>
 			Job Title: <input type="text" name="jobTitle"><br>
-			<input type="submit" value="Submit">
+			<input type="submit" value="Submit" name="submit">
 
 		</form>
 	</body>
