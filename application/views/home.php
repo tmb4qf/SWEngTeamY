@@ -1,7 +1,7 @@
 <!DOCTYPE html>
         <?php
             
-            if(empty($this->session->userdata('username'))){
+            if(!isset($this->session->userdata('username'))){
                 redirect("/LoginController");
             }
             
