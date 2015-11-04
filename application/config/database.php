@@ -96,6 +96,7 @@ $query_builder = TRUE;
 //        'port' => 8889
 //);
 
+//OPENSHIFT DATABASE
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '127.2.88.130',
@@ -118,3 +119,28 @@ $db['default'] = array(
 	'save_queries' => TRUE
         //'port' => 8889
 );
+
+
+////LOCAL DATABASE CONFIG
+//$db['default'] = array(
+//	'dsn'	=> '',
+//	'hostname' => 'localhost',
+//	'username' => 'root',
+//	'password' => 'root',
+//	'database' => 'test_login',
+//	'dbdriver' => 'mysqli',
+//	'dbprefix' => '',
+//	'pconnect' => FALSE,
+//	'db_debug' => (ENVIRONMENT !== 'production'),
+//	'cache_on' => FALSE,
+//	'cachedir' => '',
+//	'char_set' => 'utf8',
+//	'dbcollat' => 'utf8_general_ci',
+//	'swap_pre' => '',
+//	'encrypt' => FALSE,
+//	'compress' => FALSE,
+//	'stricton' => FALSE,
+//	'failover' => array(),
+//	'save_queries' => TRUE,
+//        'port' => 8889
+//);

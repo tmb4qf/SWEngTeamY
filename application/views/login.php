@@ -2,7 +2,7 @@
 <html>
     <head><title></title></head>
     <body>
-        
+
         <h1>Login Page</h1>
         <?php echo validation_errors(); ?>
         <?php echo form_open('LoginController/checkLogin'); ?>
