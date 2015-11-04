@@ -1,3 +1,6 @@
+/*
+	Create table statement with corresponding drop table statements
+*/
 DROP TABLE IF EXISTS address CASCADE;
 CREATE TABLE address(
 	addrID serial PRIMARY KEY,
@@ -138,6 +141,10 @@ CREATE TABLE roleAccessRequest(
 	isUpdateRequest boolean
 );
 
+
+/*
+	Insert statements for seed data for the following tables
+*/
 INSERT INTO careerTypes(department) VALUES('UGRD');
 INSERT INTO careerTypes(department) VALUES('GRAD');
 INSERT INTO careerTypes(department) VALUES('MED');
