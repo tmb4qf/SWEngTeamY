@@ -3,7 +3,7 @@
 */
 DROP TABLE IF EXISTS address CASCADE;
 CREATE TABLE address(
-	addrID serial PRIMARY KEY,
+	addrID int AUTO_INCREMENT PRIMARY KEY,
 	street varchar(50), 
 	city varchar(25),
 	state varchar(2),
@@ -14,13 +14,13 @@ CREATE TABLE address(
 DROP TABLE IF EXISTS person CASCADE;
 CREATE TABLE person(
 	id varchar(8) PRIMARY KEY,
-	addrID serial,
+	addrID int,
 	fname varchar(20),
 	lname varchar(25),
 	pawprint varchar(6),
 	phone_number varchar(10),
 	title varchar(20),
-	FOREIGN KEY(addrID) REFERENCES address ON DELETE CASCADE
+	FOREIGN KEY(addrID) REFERENCES address(addrID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS authentication CASCADE;
@@ -28,101 +28,101 @@ CREATE TABLE authentication (
 	id varchar(9) PRIMARY KEY,
 	password_hash CHAR(40) NOT NULL,
 	salt CHAR(40) NOT NULL,
-	FOREIGN KEY (id) REFERENCES person
+	FOREIGN KEY (id) REFERENCES person(id)
 );
 
 DROP TABLE IF EXISTS organization CASCADE;
 CREATE TABLE organization(
-	orgID serial PRIMARY KEY,
+	orgID int AUTO_INCREMENT PRIMARY KEY,
 	name varchar (20)
 );
 
 DROP TABLE IF EXISTS applicant CASCADE;
 CREATE TABLE applicant(
 	id varchar(9) PRIMARY KEY,
-	organizationID serial,
-	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	organizationID int,
+	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
 	FOREIGN KEY(organizationID) references organization(orgID) ON DELETE CASCADE,
 	isStudentWorker boolean
 );
 
 DROP TABLE IF EXISTS accessType CASCADE;
 CREATE TABLE accessType(
-	accessID serial PRIMARY KEY,
+	accessID int AUTO_INCREMENT PRIMARY KEY,
 	type varchar(15)
 );
 
 DROP TABLE IF EXISTS applicationProcessor CASCADE;
 CREATE TABLE applicationProcessor(
 	id varchar(9) PRIMARY KEY,
-	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
 	jobTitle varchar(15)
 );
 
 DROP TABLE IF EXISTS ferpaScores CASCADE;
 CREATE TABLE ferpaScores(
 	id varchar(9) PRIMARY KEY,
-	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
 	score varchar(2)
 );
 
 DROP TABLE IF EXISTS careerTypes CASCADE;
 CREATE TABLE careerTypes(
-	typeID serial PRIMARY KEY, 
+	typeID int AUTO_INCREMENT PRIMARY KEY, 
 	department varchar(7)
 );
 
 DROP TABLE IF EXISTS applicationTypes CASCADE;
 CREATE TABLE applicationTypes(
-	typeID serial PRIMARY KEY,
+	typeID int AUTO_INCREMENT PRIMARY KEY,
 	type varchar(10)
 );
 
 DROP TABLE IF EXISTS application CASCADE;
 CREATE TABLE application(
-	appID serial PRIMARY KEY,
+	appID int AUTO_INCREMENT PRIMARY KEY,
 	id varchar(9), 
-	access_type serial,
-	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
+	access_type int,
+	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
 	FOREIGN KEY(access_type) REFERENCES applicationTypes(typeID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS requestedCareerTypes CASCADE;
 CREATE TABLE requestedCareerTypes(
-	appID serial, 
+	appID int, 
 	id varchar(9),
-	typeID serial,
-	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
-	FOREIGN KEY(id) REFERENCES person ON DELETE CASCADE,
-	FOREIGN KEY(typeID) REFERENCES careerTypes ON DELETE CASCADE,
+	typeID int,
+	FOREIGN KEY(appID) REFERENCES application(appID) ON DELETE CASCADE,
+	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
+	FOREIGN KEY(typeID) REFERENCES careerTypes(typeID) ON DELETE CASCADE,
 	PRIMARY KEY(appID, id, typeID)
 );
 
 DROP TABLE IF EXISTS admissionsTestTypes CASCADE;
 CREATE TABLE admissionsTestTypes(
-	typeID serial PRIMARY KEY, 
+	typeID int AUTO_INCREMENT PRIMARY KEY, 
 	name varchar(7)
 );
 
 DROP TABLE IF EXISTS admissionsTest CASCADE;
 CREATE TABLE admissionsTest(
-	admTestID serial PRIMARY KEY,
-	applicationID serial,
-	admTypeID serial,
+	admTestID int AUTO_INCREMENT PRIMARY KEY,
+	applicationID int,
+	admTypeID int,
 	FOREIGN KEY(applicationID) REFERENCES application(appID) ON DELETE CASCADE,
 	FOREIGN KEY(admTypeID) REFERENCES admissionsTestTypes(typeID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS roleType CASCADE;
 CREATE TABLE roleType(
-	typeID serial PRIMARY KEY, 
+	typeID int AUTO_INCREMENT PRIMARY KEY, 
 	name varchar(30)
 );
 
 DROP TABLE IF EXISTS roles CASCADE;
 CREATE TABLE roles(
-	roleID serial PRIMARY KEY,
-	roleType serial,
+	roleID int AUTO_INCREMENT PRIMARY KEY,
+	roleType int,
 	roleName varchar(45),
 	FOREIGN KEY(roleType) REFERENCES roleType(typeID) ON DELETE CASCADE,
 	roleDesc varchar(300),
@@ -132,11 +132,11 @@ CREATE TABLE roles(
 
 DROP TABLE IF EXISTS roleAccessRequest CASCADE;
 CREATE TABLE roleAccessRequest(
-	roleAccessID serial PRIMARY KEY,
-	appID serial,
-	roleID serial,
-	FOREIGN KEY(appID) REFERENCES application ON DELETE CASCADE,
-	FOREIGN KEY(roleID) REFERENCES roles ON DELETE CASCADE,
+	roleAccessID int AUTO_INCREMENT PRIMARY KEY,
+	appID int,
+	roleID int,
+	FOREIGN KEY(appID) REFERENCES application(appID) ON DELETE CASCADE,
+	FOREIGN KEY(roleID) REFERENCES roles(roleID) ON DELETE CASCADE,
 	isViewRequest boolean, 
 	isUpdateRequest boolean
 );
