@@ -4,8 +4,16 @@
             if(!($this->session->userdata('username'))){
                 redirect("/LoginController");
             }
-            
-        
+            //$records is the data that was passed into this view from the HomePageController.
+            //in order to use the data within $records, $records must be cast as an object and then
+            //the fields can be accessed by the column name of the table where the data comes from
+            //print_r($records);
+            foreach($records as $rec){
+                $thestreet= $rec->street;
+                $thezip = $rec->zipcode;
+                $theState = $rec->state;
+                $theCity = $rec->city;
+            }
         ?>
 <html lang="en">
 
@@ -14,7 +22,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Security Request Form</title>
-  <link href="/assets/css/bootstrap.slate.css" rel="stylesheet">
+  <link href="css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
 </head>
@@ -47,14 +55,19 @@
             <div class="row-fluid">
               <div class="col-md-1"></div>
               <div class="col-md-8">
-                <form class="form-horizontal">
+                  <?php $attributes = array('class' => 'form-horizontal'); 
+                    echo form_open('HomePageController/checkUserData', $attributes);
+                  ?>
+                  <!--<form class="form-horizontal" method="post">-->
                   <div class="form-group">
                     <label for="ferpa" class="col-lg-3 control-label">FERPA Score:</label>
                     <div class="col-lg-2">
-                      <input type="number" class="form-control" id="ferpa" placeholder="85">%
+                      <input type="number" class="form-control" id="ferpa" placeholder="85" name="ferpa">%
                     </div>
                   </div>
-                </form>
+                  <!--<input type="submit" value ="SUBMIT"/>-->
+                <!--</form>-->
+                <?php //echo form_close(); ?>
               </div>
             </div>
           </div>
@@ -68,37 +81,40 @@
             <h3 class="panel-title">User Information</h3>
           </div>
           <div class="panel-body">
-            <form class="form-horizontal">
+            <?php $attributes = array('class' => 'form-horizontal'); 
+                //echo form_open('HomePageController/checkUserData', $attributes);
+            ?>
+            <!--<form class="form-horizontal">-->
               <div class="row-fluid">
                 <div class="col-md-10">
                   <div class="form-group">
                     <label for="username" class="col-lg-3 control-label">User Name</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="username" placeholder="full legal name">
+                      <input type="text" name = "username" class="form-control" id="username" placeholder="full legal name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="pawprint" placeholder="pawprint or SSO">
+                      <input type="text" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="emplId" class="col-lg-3 control-label">EmplId</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="emplId" placeholder="emplId">
+                      <input type="text" name="emplID" class="form-control" id="emplId" placeholder="emplId">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="title" class="col-lg-3 control-label">Title</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="title" placeholder="title">
+                      <input type="text" name="title" class="form-control" id="title" placeholder="title">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="organization" placeholder="organization">
+                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">
                     </div>
                   </div>
                 </div>
@@ -112,23 +128,23 @@
                       <div class="form-group">
                         <label for="street2" class="col-lg-3 control-label">Street</label>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="street" placeholder="street">
+                            <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php print $thestreet; ?>">
                         </div>
                         <div class="col-lg-3"></div>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="street2" placeholder="apt number">
+                          <input type="text" name="street2" class="form-control" id="street2" placeholder="apt number">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="city" class="col-lg-3 control-label">City</label>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="city" placeholder="city">
+                          <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php print $theCity;?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="zip" class="col-lg-3 control-label">Zip Code</label>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="zip" placeholder="zip">
+                          <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php print $thezip;?>">
                         </div>
                       </div>
                     </div>
@@ -140,19 +156,20 @@
                   <div class="form-group">
                     <label for="phoneNumber" class="col-lg-3 control-label">Phone Number</label>
                     <div class="col-lg-9">
-                      <input type="text" class="form-control" id="phoneNumber" placeholder="phone number">
+                      <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="studentWorker" class="col-lg-3 control-label">I am a student worker</label>
                     <div class="col-lg-9">
-                      <input type="checkbox" class="form-control" id="studentWorker">
+                      <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker">
                     </div>
                   </div>
                 </div>
                 <div class="col-md-2"></div>
               </div>
-            </form>
+                <!--<input type="submit" value="Submit"/>-->
+            <!--</form>-->
           </div>
         </div>
       </div>
@@ -295,7 +312,7 @@
                         <div class="col-lg-9">
                           <input type="radio" class="form-control" name="staffMember" value="current">Current Staff Member
                           <br>
-                          <input type="radio" class="form-control" name="staffMember" value="former">Former Staff Member
+                          <input type="radio" class="form-control" name="fstaffMember" value="former">Former Staff Member
                           <br>
                         </div>
                       </div>
@@ -308,26 +325,29 @@
                       <div class="form-group">
                         <label for="staffPosition" class="col-lg-3 control-label">Position</label>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffPosition" placeholder="staff member's position">
+                          <input type="text" name="staffPosition" class="form-control" id="staffPosition" placeholder="staff member's position">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="staffId" class="col-lg-3 control-label">Pawprint or SSO</label>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffId" placeholder="staff member's pawprint or SSO">
+                          <input type="text" class="form-control" name="staffID" id="staffId" placeholder="staff member's pawprint or SSO">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="staffEmplID" class="col-lg-3 control-label">EmplId (if known)</label>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffEmplID" placeholder="staff member's employee ID">
+                          <input type="text" class="form-control" name="staffEmplID" id="staffEmplID" placeholder="staff member's employee ID">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
+                <input type="submit" value="Submit"/>
+                <?php echo form_close(); ?>
+
+            <!--</form>-->
           </div>
         </div>
       </div>
