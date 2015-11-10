@@ -28,16 +28,22 @@
 		
 //create application
 		$sql = "INSERT INTO database.application VALUES(DEFAULT, ?, ?)";
-		$this->db->query($sql, "application", array($userID, $accessType));
+		$this->db->query($sql, array($userID, $accessType));
 		
 //insert users requested career type
+//NOTE: Might have to do this command a few times because the user could request more
+// than one career type
 		$sql = "INSERT INTO database.requestedCareerTypes VALUES(?, ?, ?)";
 		$this->db->query($sql, array($appID, $userID, $typeID));
 		
 //insert user admissions test request
+//NOTE: Might have to do this command a few times because the user could request more
+// than one career type
 		$sql = "INSERT INTO database.admissionsTestRequest VALUES(DEFAULT, ?, ?)";
 		$this->db->query($sql, array($admTestID, $appID, $admTypeID));
 
 //insert users role access request
+//NOTE: Might have to do this command a few times because the user could request more
+// than one career type
 		$sql = "INSERT INTO database.roleAccessRequest VALUES(DEFAULT, ?, ?, ?, ?)";
 		$this->db->query($sql, array($appID, $roleID, $isViewRequest, $isUpdateRequest));
