@@ -46,12 +46,6 @@ CREATE TABLE applicant(
 	isStudentWorker boolean
 );
 
-DROP TABLE IF EXISTS accessType CASCADE;
-CREATE TABLE accessType(
-	accessID int AUTO_INCREMENT PRIMARY KEY,
-	type varchar(15)
-);
-
 DROP TABLE IF EXISTS applicationProcessor CASCADE;
 CREATE TABLE applicationProcessor(
 	id varchar(9) PRIMARY KEY,
@@ -82,9 +76,9 @@ DROP TABLE IF EXISTS application CASCADE;
 CREATE TABLE application(
 	appID int AUTO_INCREMENT PRIMARY KEY,
 	id varchar(9), 
-	access_type int,
+	app_type int,
 	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
-	FOREIGN KEY(access_type) REFERENCES applicationTypes(typeID) ON DELETE CASCADE
+	FOREIGN KEY(app_type) REFERENCES applicationTypes(typeID) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS requestedCareerTypes CASCADE;
