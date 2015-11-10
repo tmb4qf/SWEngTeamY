@@ -34,7 +34,7 @@ CREATE TABLE authentication (
 DROP TABLE IF EXISTS organization CASCADE;
 CREATE TABLE organization(
 	orgID int AUTO_INCREMENT PRIMARY KEY,
-	name varchar (20)
+	name varchar (75)
 );
 
 DROP TABLE IF EXISTS applicant CASCADE;
@@ -194,3 +194,17 @@ INSERT INTO roles(roleType, roleName, isViewable, isUpdateable) VALUES(4, 'Advan
 INSERT INTO admissionsTestTypes(name) VALUES('ACT'),('SAT'),('GRE'),('GMAT'),('TOFEL'),('IELTS'),('LSAT'),('MCAT'),('AP'),('CLEP'),('GED'),('MILLERS'),('PRAX'),('PLA_MU'),('BASE');
 
 INSERT INTO applicationTypes(type) VALUES('new'),('additional');
+
+INSERT INTO organization(name) VALUES('Academic Support Center'),('Accessibility and ADA Education'),('Accountancy'),('Accounting Services'),('Adaptive Computing Technology Center'),('Administrative Services'),('Admissions - GRAD'),('Admissions - UGRAD'),('Advancement'),('Adventure Club'),('Advertising'),('Aerospace Engineering'),('Agricultural Economics'),('Agricultural Education'),('Agricultural Journalism'),('Agricultural Systems Management'),
+	('Agronomy'),('Anesthesiology and Perioperative Medicine'),('Animal Sciences'),('Anthropology'),('Applied Social Sciences'),('Architectural Studies'),('Art'),('Art History and Archaeology'),('Assessment and Consultation Clinic'),('Athletics'),('Biochemistry'),('Biological Engineering'),('Biological Sciences'),('Biomedical Sciences'),('Black Studies'),
+	('Business Information Center, MU'),('Business Services'),('Campus Dining Services'),('Campus Facilities'),('Cashiers'),('Chancellors Diversity Initiative'),('Chemical Engineering'),('Chemistry'),('Child Development Lab'),('Child Health'),('Civil and Environmental Engineering'),('Classical Studies'),('Communication'),('Communication Science and Disorders'),('Computer Science'),
+	('Conference Office'),('Convergence Journalism'),('Counseling Center'),('Culinary Cafe'),('Dermatology'),('Disability Services'),('Diversity Initiative, Chancellors'),('Division of IT'),('Economic Development'),('Economics'),('Educational, School and Counseling Psychology'),('Educational Leadership and Policy Analysis'),('Educational Technologies'),('Electrical and Computer Engineering'),
+	('English'),('Entomology'),('Environmental Health and Safety'),('Equity Office'),('Family and Community Medicine'),('Film Studies'),('Finance'),('Financial Aid'),('Fisheries and Wildlife'),('Food Science'),('Food Systems and Bioengineering Division'),('Forestry'),('French'),('General Stores'),
+	('Geography'),('Geological Sciences'),('German and Russian Studies'),('Health Management and Informatics'),('Health Psychology'),('Health Sciences'),('History'),('Honors College'),('Horticulture'),('Hotel and Restaurant Management'),('Human Development and Family Studies'),('Human Resource Services'),('Industrial and Manufacturing Systems Engineering'),('Information Sciences and Learning Technologies'),
+	('Institutional Research'),('Internal Medicine'),('Italian'),('Journalism Studies'),('KBIA'),('KOMU'),('Korean'),('Law'),('Learning, Teaching and Curriculum'),('Libraries, MU'),('Licensing and Trademarks'),('Linguistics'),('Magazine Journalism'),('Mail Services'),
+	('Management'),('Mandarin'),('Marketing'),('Mathematics'),('Mechanical and Aerospace Engineering'),('Medical Pharmacology and Physiology'),('Military Science and Leadership'),('Missouri Unions'),('Mizzou Advantage'),('Mizzou Online'),('Mizzou Store'),('Molecular Microbiology and Immunology'),('Music'),('Natural Resources'),
+	('Naval Science'),('Neurology'),('News Bureau'),('Nursing'),('Nutrition and Exercise Physiology'),('Obstetrics and Gynecology'),('Occupational Therapy'),('Ophthalmology'),('Orthopaedic Surgery'),('Otolaryngology - Head Neck'),('Parent Relations, Office of'),('Parking and Transportation Services'),('Parks, Recreation, and Tourism'),('Pathology and Anatomical Sciences'),
+	('Peace Studies'),('Personal Financial Planning'),('Philosophy'),('Photojournalism'),('Physical Medicine and Rehabilitation'),('Physical Therapy'),('Physics and Astronomy'),('Plant Microbiology and Pathology'),('Plant Sciences, Division of'),('Police Department, MU'),('Political Science'),('Portuguese'),('Printing Services and Digiprint Centers'),('Procurement Services'),
+	('Psychiatry'),('Psychological Sciences'),('Public Affairs'),('Publicatons and Alumni Communication'),('Public Health'),('Radiology'),('Radio-TV Journalism'),('Religious Studies'),('Research, Office of'),('Romance Languages and Literature'),('Rural Sociology'),('Russian Studies'),('Social Work'),('Sociology'),
+	('Soil, Environmental and Atmospheric Sciences'),('Spanish'),('Special Education'),('Sponsored Program Administration'),('State Historical Society'),('Statistics'),('Student Affairs'),('Student Health'),('Surgery'),('Textile and Apparel Management'),('Theatre'),('Tiger Garden'),('Tiger Team Store'),('University Affairs'),
+	('University Catering'),('University Concert Series'),('University Events'),('University of Missouri Press'),('University Registrar'),('Veterinary Medicine and Surgery'),('Veterinary Pathobiology'),('Visitor Relations'),('Web Communications'),('Womens and Gender Studies');
