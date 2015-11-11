@@ -108,6 +108,12 @@ hr {
 pre {
   overflow: auto;
 }
+
+#checks{
+	text-align: center;
+	
+}
+
 code,
 kbd,
 pre,
