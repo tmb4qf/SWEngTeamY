@@ -45,5 +45,25 @@
 			$query = $this->db->get();
 			return $query->result();
 		}
+		
+		/*
+			Retreieves address corresponding to $addrID
+		*/
+		public function get_address($addrID){
+			$sql = "SELECT * FROM database.address WHERE addrID = ?";
+			$this->db->query($sql, array($addrID));
+			$query = $this->db->get();
+			return $query->result();
+		}
+		
+		/*
+			Retrieves 
+		*/
+		public function get_person($id){
+			$sql = "SELECT * FROM database.person WHERE id = ?";
+			$this->db->query($sql, "user_bio", array($id));
+			$query = $this->db->get();
+			return $query->result();
+		}
 	}
 ?>
