@@ -12,12 +12,14 @@
 		
 		public function autoPop($employID){
 			$this->load->model('AppChoicesModel');
+			
 			$person = $this->AppChoicesModel->get_person($employID);
 			$addrID = $person['addrID'];
+			
 			$address = $this->AppChoicesModel->get_address($addrID);
+			
+			$this->load->view('home', $person, $address);
 		}
-       
-        
        
     }
 ?>
