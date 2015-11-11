@@ -16,6 +16,7 @@ $(function(){
 				errors = true;
 			}
 			
+			
 			if($('#pawprint').val() == ""){
 				$('#pawprint').after('<span class="errors">Enter Pawprint</span>');
 				errors = true;
@@ -56,6 +57,21 @@ $(function(){
 				errors = true;
 			}
 			
+			
+			var chks = document.getElementsByName('chk[]');
+			
+			for(var i = 0; i < chks.length; i++){
+				if(chks[i].checked){
+					errors = false;
+					break;
+				}
+				else{
+					$('#checks').after('<span class="errors">Unchecked</span>');
+					errors = true;
+					break;
+				}
+			}
+			
 			if(errors == true){
 				return false;
 			}else{
@@ -63,4 +79,10 @@ $(function(){
 			}
 	
 		});
+	});
+
+jQuery(function($){
+	   $("#phoneNumber").mask("(999) 999-9999");
+	   $("#zip").mask("99999");
+	   
 	});
