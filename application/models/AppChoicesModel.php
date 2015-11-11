@@ -57,11 +57,20 @@
 		}
 		
 		/*
-			Retrieves 
+			Retrieves person data from the person table
 		*/
 		public function get_person($id){
 			$sql = "SELECT * FROM database.person WHERE id = ?";
 			$this->db->query($sql, "user_bio", array($id));
+			$query = $this->db->get();
+			return $query->result();
+		}
+		
+		/*
+			Retrieves all the organization types
+		*/
+		public function get_org_types(){
+			$this->db->query("SELECT * FROM organization;");
 			$query = $this->db->get();
 			return $query->result();
 		}
