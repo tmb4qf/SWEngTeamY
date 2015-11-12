@@ -97,31 +97,31 @@ $query_builder = TRUE;
 //);
 
 //OPENSHIFT DATABASE
-$db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => '127.2.88.130',
-	'username' => 'adminUTKDsUt',
-	'password' => 'FBuPKrb2PVwR',
-	'database' => 'test_login',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-        //'port' => 8889
-);
+//$db['default'] = array(
+//	'dsn'	=> '',
+//	'hostname' => '127.4.190.3',
+//	'username' => 'adminTcUx8tR',
+//	'password' => 'iR3MrGrxHN6A',
+//	'database' => 'groupproject',
+//	'dbdriver' => 'mysqli',
+//	'dbprefix' => '',
+//	'pconnect' => FALSE,
+//	'db_debug' => (ENVIRONMENT !== 'production'),
+//	'cache_on' => FALSE,
+//	'cachedir' => '',
+//	'char_set' => 'utf8',
+//	'dbcollat' => 'utf8_general_ci',
+//	'swap_pre' => '',
+//	'encrypt' => FALSE,
+//	'compress' => FALSE,
+//	'stricton' => FALSE,
+//	'failover' => array(),
+//	'save_queries' => TRUE
+//        //'port' => 8889
+//);
 
 
-////LOCAL DATABASE CONFIG
+//LOCAL DATABASE CONFIG
 //$db['default'] = array(
 //	'dsn'	=> '',
 //	'hostname' => 'localhost',
@@ -144,3 +144,27 @@ $db['default'] = array(
 //	'save_queries' => TRUE,
 //        'port' => 8889
 //);
+
+//PORT FORWARDING FROM OPENSHIFT DB CONNECTION
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => '127.0.0.1',
+	'username' => 'adminUTKDsUt',
+	'password' => 'FBuPKrb2PVwR',
+	'database' => 'SWETeamY',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE,
+        'port' => 3306
+);
