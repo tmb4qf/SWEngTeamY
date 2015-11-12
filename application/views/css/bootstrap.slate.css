@@ -108,6 +108,12 @@ hr {
 pre {
   overflow: auto;
 }
+
+#checks{
+	text-align: center;
+	
+}
+
 code,
 kbd,
 pre,
@@ -2298,6 +2304,13 @@ th {
 .table .table {
   background-color: #272b30;
 }
+
+.errors{
+	color:red;
+	margin:4px;
+	font-style:italic;
+}
+
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
 .table-condensed > tfoot > tr > th,

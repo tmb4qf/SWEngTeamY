@@ -1,5 +1,4 @@
 <?php
-
     class HomePageController extends CI_Controller{
         public function index(){
             //loading the data model and creating a data array that will be passed to the home.php view
@@ -9,6 +8,9 @@
             $data['records'] = $this->UserDataModel->get_data();
             //passing data array to home view
             $this->load->view('home', $data);
+            
+            
+            print_r($data['records']);
         }
        
         
@@ -59,7 +61,18 @@
             
             //testing...
             print_r($allInfo);
-        }
-    }
 
+        }
+		
+	public function autoPop($employID){
+            $this->load->model('AppChoicesModel');
+
+            $person = $this->AppChoicesModel->get_person($employID);
+            $addrID = $person['addrID'];
+            $address = $this->AppChoicesModel->get_address($addrID);
+
+            $this->load->view('home', $person, $address);
+	}
+       
+    }
 ?>
