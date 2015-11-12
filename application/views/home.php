@@ -36,6 +36,46 @@
       <!-- TODO: add popup modal with instructions when button is selected-->
       <p><a class="btn btn-primary btn-lg">Instructions</a></p>
     </div>
+
+     <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Instructions</h4>
+          </div>
+          <div class="modal-body">
+            <p>Filler text:   In an effort to streamline the process of requesting myZou security for Staff and Faculty a new
+            form has been developed to assist you in identifying the type of access your users will
+            require. This form will be helpful to ensure that all the information to make a request are
+            gathered such as User identification, FERPA confirmation, requested access by your department
+            and appropriate signatures.</p>
+
+            <p>This form will take the place of requesting myZou access by email. The form can be obtained by
+            going to the Registrar’s Faculty and Staff website (http://registrar.missouri.edu/facultystaff/index.
+            php). Please complete the form online, print it out and collect the required
+            signatures. Then send the completed form by Campus Mail to Student Information Systems at
+            130 Jesse Hall. Once Student Information Systems has processed your request you will be
+            contacted if there are any questions or when the access has been granted.</p>
+
+            <p>If you have any questions regarding filling out the form or what type of access should be
+            requested please send your inquiries to the same myZou (mailto:myzou@missouri.edu) email
+            address. But please remember the actual requests must be made by using the new myZou
+            Security Request Form <a href="http://registrar.missouri.edu/forms/security%20req
+            uest%20form.pdf">here</a>.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- FERPA -->
     <div class="row-fluid" id="ferpa-section">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -74,6 +114,7 @@
         </div>
       </div>
     </div>
+    <!-- User Info -->
     <div class="row-fluid">
       <div class="col-md-7">
         <div class="panel panel-primary">
@@ -238,6 +279,7 @@
         </div>
       </div> -->
     </div>
+    <!-- Form Info -->
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -352,6 +394,7 @@
         </div>
       </div>
     </div>
+     <!-- Student Records -->
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -360,11 +403,92 @@
           </div>
           <div class="panel-body">
             <!-- TODO: complete panel content -->
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Role Description</th>
+                  <th>Access Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Basic Inquiry</td>
+                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advanced Inquiry</td>
+                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3Cs</td>
+                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advisor Update</td>
+                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Department SOC Update</td>
+                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- Admissions -->
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -373,11 +497,92 @@
           </div>
           <div class="panel-body">
             <!-- TODO: complete panel content -->
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Role Description</th>
+                  <th>Access Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Basic Inquiry</td>
+                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advanced Inquiry</td>
+                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3Cs</td>
+                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advisor Update</td>
+                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Department SOC Update</td>
+                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- Cashiers -->
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -386,11 +591,92 @@
           </div>
           <div class="panel-body">
             <!-- TODO: complete panel content -->
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Role Description</th>
+                  <th>Access Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Basic Inquiry</td>
+                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advanced Inquiry</td>
+                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3Cs</td>
+                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advisor Update</td>
+                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Department SOC Update</td>
+                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- Fin Aid -->
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -399,11 +685,92 @@
           </div>
           <div class="panel-body">
             <!-- TODO: complete panel content -->
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Role Description</th>
+                  <th>Access Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Basic Inquiry</td>
+                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advanced Inquiry</td>
+                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3Cs</td>
+                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advisor Update</td>
+                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Department SOC Update</td>
+                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-
+    <!-- Reserved -->
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -412,11 +779,98 @@
           </div>
           <div class="panel-body">
             <!-- TODO: complete panel content -->
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Role Description</th>
+                  <th>Access Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Basic Inquiry</td>
+                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advanced Inquiry</td>
+                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3Cs</td>
+                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Advisor Update</td>
+                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Department SOC Update</td>
+                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox"> View
+                      </label>
+                      <label>
+                        <input type="checkbox"> Update
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    
+    <!-- TODO: add authorization section. -->
+    <!-- submit -->
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <input id = "submit" class="btn btn-primary btn-lg center-block" type="submit" value="Submit">
+      </div>
+    </div>
   </div>
 </body>
 
