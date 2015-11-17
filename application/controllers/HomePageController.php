@@ -4,13 +4,18 @@
             //loading the data model and creating a data array that will be passed to the home.php view
             //within the home.php view, the data array may be accessed using the ['value'] of the $data array.
             //in this case, it is "$records"
+            $id = $this->session->userdata['username'];
             $this->load->model('UserDataModel');
-            $data['records'] = $this->UserDataModel->get_data();
+            $data['address'] = $this->UserDataModel->get_address($id);
+            $data['person'] = $this->UserDataModel->get_person($id);
+            $data['applicant'] = $this->UserDataModel->get_applicant($id);
+            $data['ferpa'] = $this->UserDataModel->get_ferpa($id);
             //passing data array to home view
             $this->load->view('home', $data);
             
             
-            print_r($data['records']);
+           // print_r($data['records']);
+            //print_r($this->session->userdata['username']);
         }
        
         
@@ -50,17 +55,20 @@
                 "staffName" =>$staffName, "staffPosition" =>$staffPosition,
                 "staffID" =>$staffID, "staffEmplID" =>$staffEmplID);
             
+            //testing...
+            print_r($allInfo);
+                        
             //these arrays are filled with data specific to the table that the data will be inserted into
-            $applicant = array("id"=>$pawprint, "isStudentWorker" => $studentWorker, "orgID" => $organization);
+            $applicant = array("id"=>$pawprint, "isStudentWorker" => $studentWorker, "organization" => $organization);
             $address = array("addID" => $pawprint, "city" => $city, "street" => $street, "zip" => $zip);
             $ferpaScores = array("id" => $pawprint, "score" => $FERPA);
             
             //calling the insert_data function in the UserDataModel and passing it the arrays that can be used to insert
             //data into the corresponding table
-            $this->UserDataModel->insert_data($applicant, $address, $ferpaScores);
+            $this->load->model('UserDataModel');
+            $this->UserDataModel->insert_data($allInfo);
             
-            //testing...
-            print_r($allInfo);
+
 
         }
 		

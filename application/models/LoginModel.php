@@ -4,10 +4,15 @@
         public function login($username, $password){
 
             //selecting username and password from members table
-            $this->db->select('username', 'password');
-            $this->db->from('members');
-            $this->db->where('username', $username);
-            $this->db->where('password', $password);
+//            $this->db->select('username', 'password');
+//            $this->db->from('members');
+//            $this->db->where('username', $username);
+//            $this->db->where('password', $password);
+            
+            $this->db->select('id', 'password_hash');
+            $this->db->from('authentication');
+            $this->db->where('id', $username);
+            $this->db->where('password_hash', $password);
             
             $query = $this->db->get();
             

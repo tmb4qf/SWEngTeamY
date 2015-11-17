@@ -8,11 +8,39 @@
             //in order to use the data within $records, $records must be cast as an object and then
             //the fields can be accessed by the column name of the table where the data comes from
             //print_r($records);
-            foreach($records as $rec){
-                $thestreet= $rec->street;
-                $thezip = $rec->zipcode;
-                $theState = $rec->state;
-                $theCity = $rec->city;
+//            foreach($records as $rec){
+//                $theferpascore = $rec->score;
+//                $thestreet= $rec->street;
+//                $thezip = $rec->zipcode;
+//                $theState = $rec->state;
+//                $theCity = $rec->city;
+//                $isStudentWorker = $rec->isStudentWorker;
+//            }
+            
+            foreach($person as $per){
+                $pawprint = $per->pawprint;
+                $phoneNum = $per->phone_number;
+                $title = $per->title;
+                $fname = $per->fname;
+                $lname = $per->lname;                
+            }
+            
+            foreach($applicant as $app){
+                $orgID = $app->organizationID;
+                $isStudentWorker = $app->isStudentWorker;
+            }
+            
+            foreach($address as $add){
+                $thestreet = $add->street;
+                $theCity = $add->city;
+                $thezip = $add->zipcode;
+                $theCountry = $add->country;
+                $theState = $add->state;
+                        
+            }
+            
+            foreach($ferpa as $fer){
+                $theferpascore = $fer->score;
             }
         ?>
 <html lang="en">
@@ -22,7 +50,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Security Request Form</title>
-  <link href="css/bootstrap.slate.css" rel="stylesheet">
+  <link href="/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
 </head>
@@ -62,7 +90,7 @@
                   <div class="form-group">
                     <label for="ferpa" class="col-lg-3 control-label">FERPA Score:</label>
                     <div class="col-lg-2">
-                      <input type="number" class="form-control" id="ferpa" placeholder="85" name="ferpa">%
+                      <input type="number" class="form-control" id="ferpa" placeholder="85" name="ferpa" value="<?php print $theferpascore; ?>">%
                     </div>
                   </div>
                   <!--<input type="submit" value ="SUBMIT"/>-->
@@ -90,13 +118,13 @@
                   <div class="form-group">
                     <label for="username" class="col-lg-3 control-label">User Name</label>
                     <div class="col-lg-9">
-                      <input type="text" name = "username" class="form-control" id="username" placeholder="full legal name">
+                      <input type="text" value="<?php print $fname . $lname; ?>" name = "username" class="form-control" id="username" placeholder="full legal name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
                     <div class="col-lg-9">
-                      <input type="text" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
+                      <input type="text" value="<?php print $pawprint; ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
                     </div>
                   </div>
                   <div class="form-group">
@@ -108,7 +136,7 @@
                   <div class="form-group">
                     <label for="title" class="col-lg-3 control-label">Title</label>
                     <div class="col-lg-9">
-                      <input type="text" name="title" class="form-control" id="title" placeholder="title">
+                      <input type="text" value="<?php print $title; ?>" name="title" class="form-control" id="title" placeholder="title">
                     </div>
                   </div>
                   <div class="form-group">
@@ -162,7 +190,7 @@
                   <div class="form-group">
                     <label for="studentWorker" class="col-lg-3 control-label">I am a student worker</label>
                     <div class="col-lg-9">
-                      <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker">
+                      <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker" <?php print $isStudentWorker ? "checked" : "" ?>>
                     </div>
                   </div>
                 </div>
