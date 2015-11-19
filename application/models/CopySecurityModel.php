@@ -57,34 +57,34 @@
 		
 		//Copies the security of a desired employee
 		public function copySecurity($staffID){
-			$this->load->model('CopySecurityModel');
-				
+			$this->load->model('UserDataModel');
+			
 			//Grabs the security of the desired employee
-			$staffID = $this->CopySecurityModel->get_id($staffID);
-			$admTests = $this->CopySecurityModel->get_admissionsTests($staffID);
-			$roles = $this->CopySecurityModel->get_roleAccessRequest($staffID);
-			$careers = $this->CopySecurityModel->get_requestedCareerTypes($staffID);
+			$staffID = $this->get_id($staffID);
+			$admTests = $this->get_admissionsTests($staffID);
+			$roles = $this->get_roleAccessRequest($staffID);
+			$careers = $this->get_requestedCareerTypes($staffID);
 		
 			//Copies the security into the current user
 			//There could be more than one admission test checked
 			if ($admTests->num_rows() > 0){
 			   foreach ($admTests as $row)
 			   {
-					$this->insert_admissionsTestRequests($appID, $row->admTypeID)
+					$this->UserDataModel->insert_admissionsTestRequests($appID, $row->admTypeID)
 			   }
 			}
 			//There could be more than one role checked
 			if ($roles->num_rows() > 0){
 			   foreach ($roles as $row)
 			   {
-					$this->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+					$this->UserDataModel->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
 			   }
 			}
 			//There could be more than one career checked 
 			if ($careers->num_rows() > 0){
 			   foreach ($careers as $row)
 			   {
-					$this->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
+					$this->UserDataModel->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
 			   }
 			}
 		}
