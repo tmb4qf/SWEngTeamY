@@ -1,0 +1,49 @@
+//$sql is your mySql query line
+//? is the place holder for the variable via query binding
+
+//$sql = "SELECT * FROM some_table WHERE id = ? AND status = ? AND author = ?";
+//$this->db->query($sql, array(3, 'live', 'Rick'));
+
+
+//gets user password hash, salt value from database using id
+		$sql = "SELECT password_hash, salt FROM database.authentication WHERE id = ?";
+		$this->db->query($sql ,array($id));
+		
+//gets bio info from database for the auto populate on the form
+		$sql = "SELECT * FROM database.person WHERE id = ?";
+		$this->db->query($sql, "user_bio", array($id));
+		
+//gets demo info from database for auto populate
+//must use last value in the result array from bio info request, addrID, to access info in request
+		$sql = "SELECT * FROM database.address WHERE addrID = ?";
+		$this->db->query($sql, array($addrID));
+
+//insert ferpa score to database
+		$sql = "INSERT INTO database.ferpaScores VALUES(?, ?)";
+		$this->db->query($sql, array($userID, $ferpaScore));		
+		
+//create applicant record
+		$sql = "INSERT INTO database.applicant VALUES(?, ?, ?)";
+		$this->db->query($sql, array($id, $orgID, $isStudentWorker));
+		
+//create application
+		$sql = "INSERT INTO database.application VALUES(DEFAULT, ?, ?)";
+		$this->db->query($sql, array($userID, $accessType));
+		
+//insert users requested career type
+//NOTE: Might have to do this command a few times because the user could request more
+// than one career type
+		$sql = "INSERT INTO database.requestedCareerTypes VALUES(?, ?, ?)";
+		$this->db->query($sql, array($appID, $userID, $typeID));
+		
+//insert user admissions test request
+//NOTE: Might have to do this command a few times because the user could request more
+// than one career type
+		$sql = "INSERT INTO database.admissionsTestRequest VALUES(DEFAULT, ?, ?)";
+		$this->db->query($sql, array($admTestID, $appID, $admTypeID));
+
+//insert users role access request
+//NOTE: Might have to do this command a few times because the user could request more
+// than one career type
+		$sql = "INSERT INTO database.roleAccessRequest VALUES(DEFAULT, ?, ?, ?, ?)";
+		$this->db->query($sql, array($appID, $roleID, $isViewRequest, $isUpdateRequest));
