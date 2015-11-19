@@ -70,21 +70,21 @@
 				$this->CopySecurityModel->copySecurity($staffID $appID);
 			}
 			else{	//If they don't want to copy security, this code runs
-				//There could be more than one admission test checked
+				//There could be more than one admission test checked or none at all
 				if ($admTests->num_rows() > 0){
 				   foreach ($admTests as $row)
 				   {
 						$this->insert_admissionsTestRequests($appID, $row->admTypeID)
 				   }
 				}
-				//There could be more than one role checked
+				//There could be more than one role checked or none at all
 				if ($roles->num_rows() > 0){
 				   foreach ($roles as $row)
 				   {
 						$this->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
 				   }
 				}
-				//There could be more than one career checked 
+				//There could be more than one career checked or none at all
 				if ($careers->num_rows() > 0){
 				   foreach ($careers as $row)
 				   {
