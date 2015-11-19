@@ -30,7 +30,7 @@
 		}
 	
 		/*
-			Retrieves all the chosen admission tests of the employee the user wants to copy 
+			Retrieves all the chosen career tests of the employee the user wants to copy 
 		*/
 		public function get_RequestedCareerTypes($copyID){
 		
@@ -40,6 +40,49 @@
             
 			$query = $this->db->get();
 			return $query->result();
+		}
+		
+		/*
+			Inserts into the database the applicationID of the current user
+			and the admission test of the employee the user is copying
+		*/
+		public function set_AdmissionsTests($appID, $admTest){
+			$data = array(
+				'applicationID' => $appID,
+				'admTestID' => $admTest
+				);
+
+			$this->db->insert('admissionsTestRequest', $data); 
+		}
+		
+		/*
+			Inserts into the database the applicationID of the current user 
+			and the roleID, isViewable, and isUpdatable of the role of the employee the user is copying
+		*/
+		public function set_RoleAccessRequest($appID, $roleID, $view, $update){
+			$data = array(
+				'appI' => $appID,
+				'roleId' => $roleID,
+				'isViewRequest' => $view,
+				'isUpdateRequest' => $update
+				);
+
+			$this->db->insert('roleAccessRequest', $data); 
+		}
+		
+		/*
+			Inserts into the database the applicationID and empID of the current user 
+			and the career type of the employee the user is copying
+		*/
+		public function set_RequestedCareerTypes($appID, $userID, $typeID){
+		
+			$data = array(
+				'appID' => $appID,
+				'id' => $userID,
+				'typeID' => $typeID
+				);
+
+			$this->db->insert('requestedCareerTypes', $data); 
 		}
 	}
 ?>
