@@ -56,7 +56,7 @@
 		}
 		
 		//Copies the security of a desired employee
-		public function copySecurity($staffID){
+		public function copySecurity($staffID, $appID){
 			$this->load->model('UserDataModel');
 			
 			//Grabs the security of the desired employee

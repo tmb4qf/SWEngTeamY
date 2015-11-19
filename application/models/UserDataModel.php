@@ -67,7 +67,7 @@
 			
 			//If the user wants to copy the security of another employee, this code runs
 			if($this->input->post('staffMember'){
-				$this->CopySecurityModel->copySecurity($staffID);
+				$this->CopySecurityModel->copySecurity($staffID $appID);
 			}
 			else{	//If they don't want to copy security, this code runs
 				//There could be more than one admission test checked
