@@ -45,6 +45,17 @@
             return $userID;  
         }
 		
+		public function get_applicationID($emplID, $requestType){
+			$this->db->select('appID');
+			$this->db->from('application');
+            $this->db->where('emplID', $emplID);
+			$this->db->where('app_type', $requestType);
+            
+			$query = $this->db->get();
+			return $query->result();
+		}
+		
+		//Copies the security of a desired employee
 		public function copySecurity($staffID){
 			$this->load->model('CopySecurityModel');
 				
@@ -75,6 +86,42 @@
 			   {
 					$this->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
 			   }
+			}
+		}
+		
+		//Inserts all the information into the database
+		public function insert_info($emplID, $organization, $studentWorker, $requestType, $staffID, $admTests, $roles, $careers){
+			//Loads data into the application and applicant table
+			$this->insert_applicant($emplID, $organization, $studentWorker);
+			$this->insert_application($emplID, $requestType);
+			$appID = $this->get_applicationID($emplID, $requestType);
+			
+			//If the user wants to copy the security of another employee, this code runs
+			if($this->input->post('staffMember'){
+				$this->copySecurity($staffID);
+			}
+			else{	//If they don't want to copy security, this code runs
+				//There could be more than one admission test checked
+				if ($admTests->num_rows() > 0){
+				   foreach ($admTests as $row)
+				   {
+						$this->insert_admissionsTestRequests($appID, $row->admTypeID)
+				   }
+				}
+				//There could be more than one role checked
+				if ($roles->num_rows() > 0){
+				   foreach ($roles as $row)
+				   {
+						$this->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+				   }
+				}
+				//There could be more than one career checked 
+				if ($careers->num_rows() > 0){
+				   foreach ($careers as $row)
+				   {
+						$this->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
+				   }
+				}
 			}
 		}
     }
