@@ -4,7 +4,7 @@
 		/*
 			Retrieves the id of the employee the user wants to copy 
 		*/
-		public function get_ID($pawprint){
+		public function get_id($pawprint){
 		
 			$this->db->select('id');
 			$this->db->from('person');
@@ -17,7 +17,7 @@
 		/*
 			Retrieves all the chosen admission tests of the employee the user wants to copy 
 		*/
-		public function get_AdmissionsTests($copyID){
+		public function get_admissionsTests($copyID){
 		
 			$this->db->select('admTypeID');
 			$this->db->from('admissionsTestRequest');
@@ -31,7 +31,7 @@
 		/*
 			Retrieves all the chosen role requests of the employee the user wants to copy 
 		*/
-		public function get_RoleAccessRequest($copyID){
+		public function get_roleAccessRequest($copyID){
 		
 			$this->db->select('roleId', 'isViewRequest', 'isUpdateRequest');
 			$this->db->from('roleAccessRequest');
@@ -45,7 +45,7 @@
 		/*
 			Retrieves all the chosen career tests of the employee the user wants to copy 
 		*/
-		public function get_RequestedCareerTypes($copyID){
+		public function get_requestedCareerTypes($copyID){
 		
 			$this->db->select('typeID');
 			$this->db->from('requestedCareerTypes');

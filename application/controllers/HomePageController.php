@@ -34,46 +34,52 @@
             $medicine = $this->input->post('medicine');
             $veterinarymedicine = $this->input->post('veterinarymedicine');
             $law = $this->input->post('law');
+	//Instead of these, maybe staffMember, fname, lname, staffPawprint? Or just staffPawprint?
             $staffMember = $this->input->post('staffMember');
             $fstaffMember = $this->input->post('fstaffMember');
-            $staffName = $this->input->post('staffName');
+			$staffName = $this->input->post('staffName');
             $staffPosition = $this->input->post('staffPosition');
-            $staffID = $this->input->post('staffID');
+			$staffID = $this->input->post('staffID');
             $staffEmplID = $this->input->post('staffEmplID');
             
+			//applicant and application insert functions called here
+			
 			//If the user wants to copy the security of another employee, this code runs
 			if($this->input->post('staffMember'){
 				$this->load->model('CopySecurityModel');
 				
 				//Grabs the security of the desired employee
-				$pawprintCopy = $this->CopySecurityModel->get_ID($staffID);
-				$admTests = $this->CopySecurityModel->get_AdmissionsTests($pawprintCopy);
-				$roles = $this->CopySecurityModel->get_RoleAccessRequest($pawprintCopy);
-				$careers = $this->CopySecurityModel->get_RequestedCareerTypes($copyID);
-			}
+				$staffID = $this->CopySecurityModel->get_ID($staffID);
+				$admTests = $this->CopySecurityModel->get_AdmissionsTests($staffID);
+				$roles = $this->CopySecurityModel->get_RoleAccessRequest($staffID);
+				$careers = $this->CopySecurityModel->get_RequestedCareerTypes($staffID);
 			
-			//There could be more than one admission test checked
-			if ($admTests->num_rows() > 0){
-			   foreach ($admTests as $row)
-			   {
-					set_AdmissionsTests($appID, $row->admTypeID)
-			   }
+				//Copies the security into the current user
+				//There could be more than one admission test checked
+				if ($admTests->num_rows() > 0){
+				   foreach ($admTests as $row)
+				   {
+						set_AdmissionsTests($appID, $row->admTypeID)
+				   }
+				}
+				//There could be more than one role checked
+				if ($roles->num_rows() > 0){
+				   foreach ($roles as $row)
+				   {
+						set_RoleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+				   }
+				}
+				//There could be more than one career checked 
+				if ($careers->num_rows() > 0){
+				   foreach ($careers as $row)
+				   {
+						set_RequestedCareerTypes($appID, $emplID, $row->typeID)
+				   }
+				}
 			}
-			//There could be more than one role checked
-			if ($roles->num_rows() > 0){
-			   foreach ($roles as $row)
-			   {
-					set_RoleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
-			   }
+			else{
+				//calls the normal admissionsTest, roleAccess, and requestedCareers functions
 			}
-			//There could be more than one career checked 
-			if ($careers->num_rows() > 0){
-			   foreach ($careers as $row)
-			   {
-					set_RequestedCareerTypes($appID, $emplID, $row->typeID)
-			   }
-			}
-			
 			
             //this array is just used for testing...you can print this array to check all of the data if you want
             $allInfo = array( "FERPA" => $FERPA,"username" => $username, "pawprint" =>$pawprint, "empID" =>$emplID, "title" =>$title,
