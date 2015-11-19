@@ -44,22 +44,6 @@
 			$staffID = $this->input->post('staffID');
             $staffEmplID = $this->input->post('staffEmplID');
 			
-			//Loads data into the application and applicant table
-			$this->UserDataModel->insert_applicant($emplID, $organization, $studentWorker);
-			$this->UserDataModel->insert_application($emplID, $requestType);
-			
-			//If the user wants to copy the security of another employee, this code runs
-			if($this->input->post('staffMember'){
-				
-				$this->copySecurity($staffID);
-				
-			}
-			else{
-				$this->UserDataModel->insert_admissionsTestRequests();
-				$this->UserDataModel->insert_roleAccessRequest();
-				$this->UserDataModel->insert_requestedCareerTypes();
-			}
-			
             //this array is just used for testing...you can print this array to check all of the data if you want
             $allInfo = array( "FERPA" => $FERPA,"username" => $username, "pawprint" =>$pawprint, "empID" =>$emplID, "title" =>$title,
                 "organization" =>$organization, "street" =>$street, "street2" =>$street2, "city" =>$city,
@@ -83,48 +67,15 @@
 
         }
 		
-		public function checkUserData($staffID){
-			$this->load->model('CopySecurityModel');
-				
-			//Grabs the security of the desired employee
-			$staffID = $this->CopySecurityModel->get_id($staffID);
-			$admTests = $this->CopySecurityModel->get_admissionsTests($staffID);
-			$roles = $this->CopySecurityModel->get_roleAccessRequest($staffID);
-			$careers = $this->CopySecurityModel->get_requestedCareerTypes($staffID);
-		
-			//Copies the security into the current user
-			//There could be more than one admission test checked
-			if ($admTests->num_rows() > 0){
-			   foreach ($admTests as $row)
-			   {
-					$this->UserDataModel->insert_admissionsTestRequests($appID, $row->admTypeID)
-			   }
-			}
-			//There could be more than one role checked
-			if ($roles->num_rows() > 0){
-			   foreach ($roles as $row)
-			   {
-					$this->UserDataModel->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
-			   }
-			}
-			//There could be more than one career checked 
-			if ($careers->num_rows() > 0){
-			   foreach ($careers as $row)
-			   {
-					$this->UserDataModel->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
-			   }
-			}
+		public function autoPop($employID){
+				$this->load->model('AppChoicesModel');
+
+				$person = $this->AppChoicesModel->get_person($employID);
+				$addrID = $person['addrID'];
+				$address = $this->AppChoicesModel->get_address($addrID);
+
+				$this->load->view('home', $person, $address);
 		}
-		
-	public function autoPop($employID){
-            $this->load->model('AppChoicesModel');
-
-            $person = $this->AppChoicesModel->get_person($employID);
-            $addrID = $person['addrID'];
-            $address = $this->AppChoicesModel->get_address($addrID);
-
-            $this->load->view('home', $person, $address);
-	}
        
     }
 ?>

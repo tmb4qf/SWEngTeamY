@@ -44,5 +44,38 @@
             $userID = $this->session->userdata('username');
             return $userID;  
         }
+		
+		public function copySecurity($staffID){
+			$this->load->model('CopySecurityModel');
+				
+			//Grabs the security of the desired employee
+			$staffID = $this->CopySecurityModel->get_id($staffID);
+			$admTests = $this->CopySecurityModel->get_admissionsTests($staffID);
+			$roles = $this->CopySecurityModel->get_roleAccessRequest($staffID);
+			$careers = $this->CopySecurityModel->get_requestedCareerTypes($staffID);
+		
+			//Copies the security into the current user
+			//There could be more than one admission test checked
+			if ($admTests->num_rows() > 0){
+			   foreach ($admTests as $row)
+			   {
+					$this->insert_admissionsTestRequests($appID, $row->admTypeID)
+			   }
+			}
+			//There could be more than one role checked
+			if ($roles->num_rows() > 0){
+			   foreach ($roles as $row)
+			   {
+					$this->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+			   }
+			}
+			//There could be more than one career checked 
+			if ($careers->num_rows() > 0){
+			   foreach ($careers as $row)
+			   {
+					$this->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
+			   }
+			}
+		}
     }
 ?>
