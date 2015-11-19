@@ -45,6 +45,7 @@
             return $userID;  
         }
 		
+		//Gets the application id needed to insert the data into the database
 		public function get_applicationID($emplID, $requestType){
 			$this->db->select('appID');
 			$this->db->from('application');
@@ -90,10 +91,10 @@
 		}
 		
 		//Inserts all the information into the database
-		public function insert_info($emplID, $organization, $studentWorker, $requestType, $staffID, $admTests, $roles, $careers){
+		public function insert_info($emplID, $organization, $studentWorker, $requestType, $desc, $staffID, $admTests, $roles, $careers){
 			//Loads data into the application and applicant table
 			$this->insert_applicant($emplID, $organization, $studentWorker);
-			$this->insert_application($emplID, $requestType);
+			$this->insert_application($emplID, $requestType, $desc);
 			$appID = $this->get_applicationID($emplID, $requestType);
 			
 			//If the user wants to copy the security of another employee, this code runs
