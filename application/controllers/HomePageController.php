@@ -15,6 +15,8 @@
        
         
         public function checkUserData(){
+			$this->load->model('UserDataModel');
+			
             //all of the post data on form submission
             $FERPA = $this->input->post('ferpa');
             $username = $this->input->post('username');
@@ -34,13 +36,14 @@
             $medicine = $this->input->post('medicine');
             $veterinarymedicine = $this->input->post('veterinarymedicine');
             $law = $this->input->post('law');
+	//Instead of these, maybe staffMember, fname, lname, staffPawprint? Or just staffPawprint?
             $staffMember = $this->input->post('staffMember');
             $fstaffMember = $this->input->post('fstaffMember');
-            $staffName = $this->input->post('staffName');
+			$staffName = $this->input->post('staffName');
             $staffPosition = $this->input->post('staffPosition');
-            $staffID = $this->input->post('staffID');
+			$staffID = $this->input->post('staffID');
             $staffEmplID = $this->input->post('staffEmplID');
-            
+			
             //this array is just used for testing...you can print this array to check all of the data if you want
             $allInfo = array( "FERPA" => $FERPA,"username" => $username, "pawprint" =>$pawprint, "empID" =>$emplID, "title" =>$title,
                 "organization" =>$organization, "street" =>$street, "street2" =>$street2, "city" =>$city,
@@ -64,15 +67,15 @@
 
         }
 		
-	public function autoPop($employID){
-            $this->load->model('AppChoicesModel');
+		public function autoPop($employID){
+				$this->load->model('AppChoicesModel');
 
-            $person = $this->AppChoicesModel->get_person($employID);
-            $addrID = $person['addrID'];
-            $address = $this->AppChoicesModel->get_address($addrID);
+				$person = $this->AppChoicesModel->get_person($employID);
+				$addrID = $person['addrID'];
+				$address = $this->AppChoicesModel->get_address($addrID);
 
-            $this->load->view('home', $person, $address);
-	}
+				$this->load->view('home', $person, $address);
+		}
        
     }
 ?>

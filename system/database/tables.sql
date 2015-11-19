@@ -17,7 +17,7 @@ CREATE TABLE person(
 	addrID int,
 	fname varchar(20),
 	lname varchar(25),
-	pawprint varchar(6),
+	pawprint varchar(20),
 	phone_number varchar(10),
 	title varchar(20),
 	FOREIGN KEY(addrID) REFERENCES address(addrID) ON DELETE CASCADE
@@ -77,6 +77,7 @@ CREATE TABLE application(
 	appID int AUTO_INCREMENT PRIMARY KEY,
 	id varchar(9), 
 	app_type int,
+	desc varchar(500),
 	FOREIGN KEY(id) REFERENCES person(id) ON DELETE CASCADE,
 	FOREIGN KEY(app_type) REFERENCES applicationTypes(typeID) ON DELETE CASCADE
 );
