@@ -15,6 +15,8 @@
        
         
         public function checkUserData(){
+			$this->load->model('UserDataModel');
+			
             //all of the post data on form submission
             $FERPA = $this->input->post('ferpa');
             $username = $this->input->post('username');
@@ -41,44 +43,21 @@
             $staffPosition = $this->input->post('staffPosition');
 			$staffID = $this->input->post('staffID');
             $staffEmplID = $this->input->post('staffEmplID');
-            
-			//applicant and application insert functions called here
+			
+			//Loads data into the application and applicant table
+			$this->UserDataModel->insert_applicant($emplID, $organization, $studentWorker);
+			$this->UserDataModel->insert_application($emplID, $requestType);
 			
 			//If the user wants to copy the security of another employee, this code runs
 			if($this->input->post('staffMember'){
-				$this->load->model('CopySecurityModel');
 				
-				//Grabs the security of the desired employee
-				$staffID = $this->CopySecurityModel->get_ID($staffID);
-				$admTests = $this->CopySecurityModel->get_AdmissionsTests($staffID);
-				$roles = $this->CopySecurityModel->get_RoleAccessRequest($staffID);
-				$careers = $this->CopySecurityModel->get_RequestedCareerTypes($staffID);
-			
-				//Copies the security into the current user
-				//There could be more than one admission test checked
-				if ($admTests->num_rows() > 0){
-				   foreach ($admTests as $row)
-				   {
-						set_AdmissionsTests($appID, $row->admTypeID)
-				   }
-				}
-				//There could be more than one role checked
-				if ($roles->num_rows() > 0){
-				   foreach ($roles as $row)
-				   {
-						set_RoleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
-				   }
-				}
-				//There could be more than one career checked 
-				if ($careers->num_rows() > 0){
-				   foreach ($careers as $row)
-				   {
-						set_RequestedCareerTypes($appID, $emplID, $row->typeID)
-				   }
-				}
+				$this->copySecurity($staffID);
+				
 			}
 			else{
-				//calls the normal admissionsTest, roleAccess, and requestedCareers functions
+				$this->UserDataModel->insert_admissionsTestRequests();
+				$this->UserDataModel->insert_roleAccessRequest();
+				$this->UserDataModel->insert_requestedCareerTypes();
 			}
 			
             //this array is just used for testing...you can print this array to check all of the data if you want
@@ -103,6 +82,39 @@
             print_r($allInfo);
 
         }
+		
+		public function checkUserData($staffID){
+			$this->load->model('CopySecurityModel');
+				
+			//Grabs the security of the desired employee
+			$staffID = $this->CopySecurityModel->get_id($staffID);
+			$admTests = $this->CopySecurityModel->get_admissionsTests($staffID);
+			$roles = $this->CopySecurityModel->get_roleAccessRequest($staffID);
+			$careers = $this->CopySecurityModel->get_requestedCareerTypes($staffID);
+		
+			//Copies the security into the current user
+			//There could be more than one admission test checked
+			if ($admTests->num_rows() > 0){
+			   foreach ($admTests as $row)
+			   {
+					$this->UserDataModel->insert_admissionsTestRequests($appID, $row->admTypeID)
+			   }
+			}
+			//There could be more than one role checked
+			if ($roles->num_rows() > 0){
+			   foreach ($roles as $row)
+			   {
+					$this->UserDataModel->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+			   }
+			}
+			//There could be more than one career checked 
+			if ($careers->num_rows() > 0){
+			   foreach ($careers as $row)
+			   {
+					$this->UserDataModel->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
+			   }
+			}
+		}
 		
 	public function autoPop($employID){
             $this->load->model('AppChoicesModel');
