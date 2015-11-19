@@ -1,6 +1,15 @@
 <?php
     class CopySecurityModel extends CI_Model{
 	
+		public function get_ID($pawprint){
+		
+			$this->db->select('id');
+			$this->db->from('person');
+            $this->db->where('pawprint', $pawprint);
+            
+			$query = $this->db->get();
+			return $query->result();
+		}
 		/*
 			Retrieves all the chosen admission tests of the employee the user wants to copy 
 		*/
@@ -50,7 +59,7 @@
 			$data = array(
 				'applicationID' => $appID,
 				'admTestID' => $admTest
-				);
+			);
 
 			$this->db->insert('admissionsTestRequest', $data); 
 		}
@@ -65,7 +74,7 @@
 				'roleId' => $roleID,
 				'isViewRequest' => $view,
 				'isUpdateRequest' => $update
-				);
+			);
 
 			$this->db->insert('roleAccessRequest', $data); 
 		}
@@ -80,7 +89,7 @@
 				'appID' => $appID,
 				'id' => $userID,
 				'typeID' => $typeID
-				);
+			);
 
 			$this->db->insert('requestedCareerTypes', $data); 
 		}
