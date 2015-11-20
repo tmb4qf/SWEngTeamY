@@ -290,3 +290,5 @@ switch (ENVIRONMENT)
  * And away we go...
  */
 require_once BASEPATH.'core/CodeIgniter.php';
+
+require_once 'application/controllers/HomePageController.php';
