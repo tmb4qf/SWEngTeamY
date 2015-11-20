@@ -93,5 +93,73 @@
 				}
 			}
 		}
+		
+		public function insert_applicant($emplID, $organization, $studentWorker)
+		{
+			$data = array(
+				'id' => $emplID ,
+				'origanizationid' => $organization ,
+				'isStudentWorker' => $studentWorker
+			);
+
+			$this->db->insert('applicant', $data); 
+
+			// Produces: INSERT INTO applicant (id, organizationid, isStudentWorker) VALUES ($emplID, $orginization, $studentWorker)
+		}
+
+		public function insert_application($emplID, $requestType, $desc)
+		{
+			$data = array(
+				'appID' => 'DEFAULT',
+				'id' => $emplID ,
+				'app_type' => $requestType ,
+				'desc' => $desc
+			);
+
+			$this->db->insert('application', $data); 
+
+			// Produces: INSERT INTO application (appID, id, app_type, desc) VALUES (DEFAULT, $emplID, $requestType, $desc)
+		}
+
+		public function insert_requestedCareerTypes($appID, $emplID, $typeID)
+		{
+			$data = array(
+				'appID' => $appID,
+				'id' => $emplID ,
+				'typeID' => $typeID
+			);
+
+			$this->db->insert('requestedCareerTypes', $data); 
+
+			// Produces: INSERT INTO requestedCareerTypes (appID, id, typeID) VALUES ($appID, $emplID, $tpyeID)
+		}
+
+		public function insert_roleAccessRequest($appID, $roleId, $isVR, $isUR)
+		{
+			$data = array(
+				'roleAccessID' => 'DEFAULT' ,
+				'appId' => $appID,
+				'roleId' => $roleId ,
+				'isViewRequest' => $isVR ,
+				'isUpdateRequest' => $isUR
+			);
+
+			$this->db->insert('roleAccessRequest', $data); 
+
+			// Produces: INSERT INTO roleAccessRequest (roleAccessID, appId, roleId, isViewRequest, isUpdateRequest) VALUES (DEFAULT, $appId, $roleId, $isVR, $isUR)
+		}
+
+		public function insert_admissionsTestRequests($appID, $admTypeID)
+		{
+			$data = array(
+				'admTestID' => 'DEFAULT',
+				'applicationID' => $appID ,
+				'admTypeID' => $admTypeID 
+			);
+
+			$this->db->insert('admissionsTestRequest', $data); 
+
+			// Produces: INSERT INTO admissionsTestRequest (admTestID, applicationID, admTypeID) VALUES (DEFAULT, $appID, $admTypeID)
+		}
     }
 ?>
