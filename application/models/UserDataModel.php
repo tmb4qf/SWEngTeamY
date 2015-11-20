@@ -66,29 +66,29 @@
 			$appID = $this->get_applicationID($emplID, $requestType);
 			
 			//If the user wants to copy the security of another employee, this code runs
-			if($this->input->post('staffMember'){
-				$this->CopySecurityModel->copySecurity($staffID $appID);
+			if($this->input->post('staffMember')){
+				$this->CopySecurityModel->copySecurity($staffID, $appID);
 			}
 			else{	//If they don't want to copy security, this code runs
 				//There could be more than one admission test checked or none at all
 				if ($admTests->num_rows() > 0){
 				   foreach ($admTests as $row)
 				   {
-						$this->insert_admissionsTestRequests($appID, $row->admTypeID)
+						$this->insert_admissionsTestRequests($appID, $row->admTypeID);
 				   }
 				}
 				//There could be more than one role checked or none at all
 				if ($roles->num_rows() > 0){
 				   foreach ($roles as $row)
 				   {
-						$this->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+						$this->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest);
 				   }
 				}
 				//There could be more than one career checked or none at all
 				if ($careers->num_rows() > 0){
 				   foreach ($careers as $row)
 				   {
-						$this->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
+						$this->insert_requestedCareerTypes($appID, $emplID, $row->typeID);
 				   }
 				}
 			}
