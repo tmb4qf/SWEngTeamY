@@ -8,11 +8,19 @@
             //in order to use the data within $records, $records must be cast as an object and then
             //the fields can be accessed by the column name of the table where the data comes from
             //print_r($records);
-            foreach($records as $rec){
-                $thestreet= $rec->street;
-                $thezip = $rec->zipcode;
-                $theState = $rec->state;
-                $theCity = $rec->city;
+            $theStreet = "street";
+            $theCity = "city";
+            $theState = "state";
+            $theZip = "zip";
+            $arr = (array)$records;
+            if(!empty($arr)){
+              foreach($records as $rec){
+                  $thestreet= $rec->street;
+                  $theZip = $rec->zipcode;
+                  $theState = $rec->state;
+                  $theCity = $rec->city;
+                  print_r($theCity);
+              }
             }
         ?>
 <html lang="en">
@@ -22,14 +30,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Security Request Form</title>
-  <link href="css/bootstrap.slate.css" rel="stylesheet">
+  <link href="/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
   <div class="container">
-    <?php echo anchor('LogoutController', 'Logout'); ?>
+    <!--<?php echo anchor('LogoutController', 'Logout'); ?>-->
     <div class="jumbotron">
       <h1>myZou SECURITY Request Form</h1>
       <p>University of Missouri, Columbia</p>
@@ -169,7 +177,7 @@
                       <div class="form-group">
                         <label for="street2" class="col-lg-3 control-label">Street</label>
                         <div class="col-lg-9">
-                            <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php print $thestreet; ?>">
+                            <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
                         </div>
                         <div class="col-lg-3"></div>
                         <div class="col-lg-9">
@@ -179,13 +187,13 @@
                       <div class="form-group">
                         <label for="city" class="col-lg-3 control-label">City</label>
                         <div class="col-lg-9">
-                          <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php print $theCity;?>">
+                          <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>"\>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="zip" class="col-lg-3 control-label">Zip Code</label>
                         <div class="col-lg-9">
-                          <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php print $thezip;?>">
+                          <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>"\>
                         </div>
                       </div>
                     </div>

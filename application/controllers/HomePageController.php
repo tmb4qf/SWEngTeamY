@@ -10,7 +10,7 @@
             $this->load->view('home', $data);
             
             
-            print_r($data['records']);
+            //print_r($data['records']);
         }
        
         
