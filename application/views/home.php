@@ -33,7 +33,9 @@
   <link href="/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
-  <script src="/assets/js/submit.js"></script>
+  <!--<script src="/assets/js/submit.js"></script>-->
+  <script src="/assets/js/jquery.maskedinput.js"></script>
+  <script src="/assets/js/FormValidation.js"></script>
 </head>
 
 <body>
@@ -95,7 +97,7 @@
             <div class="row-fluid">
               <div class="col-md-1"></div>
               <div class="col-md-10">
-                <div class="text-danger">
+                <div class="">
                   A passing score of 85% on the FERPA Quiz is required before access to student data is approved. Request access to the FERPA tutorial and access to the FERPA quiz
                   <a href="http://myzoutraining.missouri.edu/ferpareq.php">here</a>.
                 </div>
@@ -323,12 +325,12 @@
                           <input type="text" name="staffPosition" class="form-control" id="staffPosition" placeholder="staff member's position">
                         </div>
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="staffId" class="col-lg-3 control-label">Pawprint or SSO</label>
                         <div class="col-lg-9">
                           <input type="text" class="form-control" name="staffID" id="staffId" placeholder="staff member's pawprint or SSO">
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-group">
                         <label for="staffEmplID" class="col-lg-3 control-label">EmplId (if known)</label>
                         <div class="col-lg-9">
@@ -818,7 +820,7 @@
     <!-- submit -->
     <div class="row-fluid">
       <div class="col-md-12">
-        <input id = "submit" class="btn btn-primary btn-lg center-block" type="submit" value="Submit" onclick="submitForm()" />
+        <a class="btn btn-primary btn-lg" onclick="submitForm()">Submit</a>
       </div>
     </div>
   </div>

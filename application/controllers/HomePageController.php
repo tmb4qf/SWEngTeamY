@@ -55,7 +55,7 @@
             
             //these arrays are filled with data specific to the table that the data will be inserted into
             $applicant = array("id"=>$pawprint, "isStudentWorker" => $studentWorker, "orgID" => $organization);
-            $address = array("addID" => $pawprint, "city" => $city, "street" => $street, "zip" => $zip);
+            $address = array("addrId" => $pawprint, "city" => $city, "street" => $street, "zip" => $zip);
             $ferpaScores = array("id" => $pawprint, "score" => $FERPA);
             
             //calling the insert_data function in the UserDataModel and passing it the arrays that can be used to insert

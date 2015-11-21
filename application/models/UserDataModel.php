@@ -10,17 +10,17 @@
             $addrID = $address['addrId'];
             $street = $address['street'];
             $city = $address['city'];
-            $state = $address['state'];
-            $country = $address['country'];
-            $zip = $address['zip_code'];	
+            // $state = $address['state'];
+            // $country = $address['country'];
+            $zip = $address['zip'];	
             $score = $ferpaScores['score'];
 			
-            $this->db->query("INSERT INTO address(addrId, street, city, state, country, zip_code) VALUES($addrId, $street, $city, $state, $country, $zip)");
+            $this->db->query("INSERT INTO address(street, city, zip_code) VALUES($street, $city, $zip)");
             $this->db->query("INSERT INTO ferpaScores(id, score) VALUES($appID, $score)");
             
             //executing an insert statement
             //$this->db->query("INSERT INTO applicant(id, isStudentWorker, organizationID) VALUES($appID, $isStuWorker, $orgID)");
-        }        
+        }
 
             
         
