@@ -33,11 +33,12 @@
   <link href="/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/submit.js"></script>
 </head>
 
 <body>
   <div class="container">
-    <!--<?php echo anchor('LogoutController', 'Logout'); ?>-->
+    <?php echo anchor('LogoutController', 'Logout'); ?>
     <div class="jumbotron">
       <h1>myZou SECURITY Request Form</h1>
       <p>University of Missouri, Columbia</p>
@@ -106,15 +107,14 @@
                   <?php $attributes = array('class' => 'form-horizontal'); 
                     echo form_open('HomePageController/checkUserData', $attributes);
                   ?>
-                  <!--<form class="form-horizontal" method="post">-->
+                  <form class="form-horizontal" method="post">
                   <div class="form-group">
                     <label for="ferpa" class="col-lg-3 control-label">FERPA Score:</label>
                     <div class="col-lg-2">
                       <input type="number" class="form-control" id="ferpa" placeholder="85" name="ferpa">%
                     </div>
                   </div>
-                  <!--<input type="submit" value ="SUBMIT"/>-->
-                <!--</form>-->
+                </form>
                 <?php //echo form_close(); ?>
               </div>
             </div>
@@ -130,162 +130,102 @@
             <h3 class="panel-title">User Information</h3>
           </div>
           <div class="panel-body">
-            <?php $attributes = array('class' => 'form-horizontal'); 
+            <!--<?php $attributes = array('class' => 'form-horizontal'); 
                 //echo form_open('HomePageController/checkUserData', $attributes);
-            ?>
-            <!--<form class="form-horizontal">-->
-              <div class="row-fluid">
-                <div class="col-md-10">
-                  <div class="form-group">
-                    <label for="username" class="col-lg-3 control-label">User Name</label>
-                    <div class="col-lg-9">
-                      <input type="text" name = "username" class="form-control" id="username" placeholder="full legal name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
-                    <div class="col-lg-9">
-                      <input type="text" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="emplId" class="col-lg-3 control-label">EmplId</label>
-                    <div class="col-lg-9">
-                      <input type="text" name="emplID" class="form-control" id="emplId" placeholder="emplId">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="title" class="col-lg-3 control-label">Title</label>
-                    <div class="col-lg-9">
-                      <input type="text" name="title" class="form-control" id="title" placeholder="title">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
-                    <div class="col-lg-9">
-                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">
-                    </div>
+            ?>-->
+            <form class="form-horizontal">
+            <div class="row-fluid">
+              <div class="col-md-10">
+                <div class="form-group">
+                  <label for="fname" class="col-lg-3 control-label">First Name</label>
+                  <div class="col-lg-9">
+                    <input type="text" name = "fname" class="form-control" id="fname" placeholder="last name">
                   </div>
                 </div>
-                <div class="col-md-2"></div>
-              </div>
-              <div class="row-fluid">
-                <div class="col-md-11">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">Campus Address</div>
-                    <div class="panel-body">
-                      <div class="form-group">
-                        <label for="street2" class="col-lg-3 control-label">Street</label>
-                        <div class="col-lg-9">
-                            <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
-                        </div>
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-9">
-                          <input type="text" name="street2" class="form-control" id="street2" placeholder="apt number">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="city" class="col-lg-3 control-label">City</label>
-                        <div class="col-lg-9">
-                          <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>"\>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="zip" class="col-lg-3 control-label">Zip Code</label>
-                        <div class="col-lg-9">
-                          <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>"\>
-                        </div>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <label for="lname" class="col-lg-3 control-label">Last Name</label>
+                  <div class="col-lg-9">
+                    <input type="text" name = "lname" class="form-control" id="lname" placeholder="first name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
+                  <div class="col-lg-9">
+                    <input type="text" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="emplId" class="col-lg-3 control-label">EmplId</label>
+                  <div class="col-lg-9">
+                    <input type="text" name="emplID" class="form-control" id="emplId" placeholder="emplId">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="title" class="col-lg-3 control-label">Title</label>
+                  <div class="col-lg-9">
+                    <input type="text" name="title" class="form-control" id="title" placeholder="title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
+                  <div class="col-lg-9">
+                    <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">
                   </div>
                 </div>
               </div>
-              <div class="row-fluid">
-                <div class="col-md-10">
-                  <div class="form-group">
-                    <label for="phoneNumber" class="col-lg-3 control-label">Phone Number</label>
-                    <div class="col-lg-9">
-                      <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number">
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row-fluid">
+              <div class="col-md-11">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Campus Address</div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <label for="street2" class="col-lg-3 control-label">Street</label>
+                      <div class="col-lg-9">
+                          <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
+                      </div>
+                      <div class="col-lg-3"></div>
+                      <div class="col-lg-9">
+                        <input type="text" name="street2" class="form-control" id="street2" placeholder="apt number">
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="studentWorker" class="col-lg-3 control-label">I am a student worker</label>
-                    <div class="col-lg-9">
-                      <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker">
+                    <div class="form-group">
+                      <label for="city" class="col-lg-3 control-label">City</label>
+                      <div class="col-lg-9">
+                        <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>"\>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="zip" class="col-lg-3 control-label">Zip Code</label>
+                      <div class="col-lg-9">
+                        <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>"\>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2"></div>
               </div>
-                <!--<input type="submit" value="Submit"/>-->
-            <!--</form>-->
+            </div>
+            <div class="row-fluid">
+              <div class="col-md-10">
+                <div class="form-group">
+                  <label for="phoneNumber" class="col-lg-3 control-label">Phone Number</label>
+                  <div class="col-lg-9">
+                    <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="studentWorker" class="col-lg-3 control-label">I am a student worker</label>
+                  <div class="col-lg-9">
+                    <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- <div class="col-md-5">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Form Information</h3>
-          </div>
-          <div class="panel-body">
-            <form class="form-horizontal">
-              <div class="row-fluid">
-                <!-- <div class="form-group">
-                  <label for="requestType" class="col-lg-3 control-label">This is a(n): </label>
-                  <div class="col-lg-9">
-                    <input type="radio" class="form-control" name="requestType" value="new">New Request<br>
-                    <input type="radio" class="form-control" name="requestType" value="additional">Additonal Request<br>
-                  </div>
-                </div>
-              </div>
-              <div class="row-fluid">
-                <div class="col-md-12">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Copy security of Current or Former Staff Member</h3>
-                    </div>
-                    <div class="panel-body">
-                      <div class="form-group">
-                        <!-- <label for="staffMember" class="col-lg-3 control-label"></label> 
-                        <div class="col-lg-9">
-                          <input type="radio" class="form-control" name="staffMember" value="current">Current Staff Member
-                          <br>
-                          <input type="radio" class="form-control" name="staffMember" value="former">Former Staff Member
-                          <br>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="staffName" class="col-lg-3 control-label">Name</label>
-                        <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffName" placeholder="staff member's name">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="staffPosition" class="col-lg-3 control-label">Position</label>
-                        <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffPosition" placeholder="staff member's position">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="staffId" class="col-lg-3 control-label">Pawprint or SSO</label>
-                        <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffId" placeholder="staff member's pawprint or SSO">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="staffEmplID" class="col-lg-3 control-label">EmplId (if known)</label>
-                        <div class="col-lg-9">
-                          <input type="text" class="form-control" id="staffEmplID" placeholder="staff member's employee ID">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div> -->
     </div>
     <!-- Form Info -->
     <div class="row-fluid">
@@ -301,12 +241,21 @@
                   <div class="form-group">
                     <label for="requestType" class="col-lg-3 control-label">This is a(n): </label>
                     <div class="col-lg-9">
-                      <input type="radio" class="form-control" name="requestType" value="new">New Request
-                      <br>
-                      <input type="radio" class="form-control" name="requestType" value="additional">Additional Request
-                      <br>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <input class = "col-lg-1" id="newRequest" type="radio" class="form-control" name="requestType" value="new">
+                          <label class = "col-lg-11" for="newRequest" class="control-label">New Request</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <input class="col-lg-1" id="addtlRequest" type="radio" class="form-control" name="requestType" value="additional">
+                          <label class="col-lg-11" for="addtlRequest" class="control-label">Additional Request</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <div class="row-fluid">
                     <!-- TODO: fix indentation of label -->
@@ -356,14 +305,10 @@
                       <h3 class="panel-title">Copy security of Current or Former Staff Member</h3>
                     </div>
                     <div class="panel-body">
-                      <div class="form-group">
-                        <!-- <label for="staffMember" class="col-lg-3 control-label"></label> -->
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-9">
-                          <input type="radio" class="form-control" name="staffMember" value="current">Current Staff Member
-                          <br>
-                          <input type="radio" class="form-control" name="fstaffMember" value="former">Former Staff Member
-                          <br>
+                      <div class="form-group row">
+                        <div class="col-lg-12">
+                          <input class="col-lg-1" type="checkbox" class="form-control" name="staffMember" value="current">
+                          <label class="col-lg-11" for="staffMember" class="col-lg-10 control-label">I want to copy the credentials of a staff member:</label>
                         </div>
                       </div>
                       <div class="form-group">
@@ -394,9 +339,6 @@
                   </div>
                 </div>
               </div>
-                <input type="submit" value="Submit"/>
-                <?php echo form_close(); ?>
-
             <!--</form>-->
           </div>
         </div>
@@ -876,7 +818,7 @@
     <!-- submit -->
     <div class="row-fluid">
       <div class="col-md-12">
-        <input id = "submit" class="btn btn-primary btn-lg center-block" type="submit" value="Submit">
+        <input id = "submit" class="btn btn-primary btn-lg center-block" type="submit" value="Submit" onclick="submitForm()" />
       </div>
     </div>
   </div>
