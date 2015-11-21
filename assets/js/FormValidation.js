@@ -53,7 +53,7 @@ function submitForm() {
     var errors = false;
 
     //Validate ferpa score
-    if ($('#ferpa').val() < 85) {
+    if ($('#ferpa').val() < 85 || $('#ferpa').val() > 100) {
         $('#ferpa').after(errorMessage("Unacceptable"));
         errors = true;
     }
