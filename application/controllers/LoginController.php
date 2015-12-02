@@ -13,7 +13,12 @@
             if($this->form_validation->run() == false){
                 $this->load->view('login');
             }else{
-                redirect('HomePageController/index');
+                //print_r($this->session->all_userdata());
+                if($this->session->userdata('processor') == 1){
+                    redirect('ApplicantProcessor/index');
+                }else{
+                    redirect('HomePageController/index');
+                }
             }
             
             
