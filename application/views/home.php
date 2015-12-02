@@ -72,6 +72,7 @@
   <link href="<?php echo base_url();?>/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="<?php echo base_url();?>/assets/js/bootstrap.js"></script>
+  <script src="<?php echo base_url();?>/assets/js/jquery.maskedinput.js"></script>
   <script src="<?php echo base_url();?>/assets/js/FormValidation.js"></script>
   
   <script>
