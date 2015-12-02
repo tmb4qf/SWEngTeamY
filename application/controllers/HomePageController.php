@@ -10,6 +10,8 @@
             $data['person'] = $this->UserDataModel->get_person($id);
             $data['applicant'] = $this->UserDataModel->get_applicant($id);
             $data['ferpa'] = $this->UserDataModel->get_ferpa($id);
+            $data['application'] = $this->UserDataModel->get_appData($id);
+            $data['dropdown'] = $this->UserDataModel->get_dropdown();
             //passing data array to home view
             $this->load->view('home', $data);
             
@@ -45,18 +47,20 @@
             $staffPosition = $this->input->post('staffPosition');
             $staffID = $this->input->post('staffID');
             $staffEmplID = $this->input->post('staffEmplID');
+            $careerType = ["UGRAD" => $undergraduate, "GRAD" => $graduate, "MED" => $medicine, "LAW" => $law, "VET" => $veterinarymedicine];
+            $desc = $this->input->post('description');
             
             //this array is just used for testing...you can print this array to check all of the data if you want
             $allInfo = array( "FERPA" => $FERPA,"username" => $username, "pawprint" =>$pawprint, "empID" =>$emplID, "title" =>$title,
                 "organization" =>$organization, "street" =>$street, "street2" =>$street2, "city" =>$city,
                 "zip" =>$zip, "phone" =>$phoneNumber, "studentWorker" =>$studentWorker, "requestType" =>$requestType,
-                 "undergraduate" =>$undergraduate, "graduate" =>$graduate,
-                "medicine" =>$medicine, "vet" =>$veterinarymedicine, "law" =>$law, "staff" =>$staffMember, "former staff" =>$fstaffMember,
+                 "careerType" => $careerType, "staff" =>$staffMember, "former staff" =>$fstaffMember,
                 "staffName" =>$staffName, "staffPosition" =>$staffPosition,
-                "staffID" =>$staffID, "staffEmplID" =>$staffEmplID);
+                "staffID" =>$staffID, "staffEmplID" =>$staffEmplID, "description" => $desc);
             
             //testing...
-            print_r($allInfo);
+            //print_r($allInfo);
+            //print "$organization";
                         
             //these arrays are filled with data specific to the table that the data will be inserted into
             $applicant = array("id"=>$pawprint, "isStudentWorker" => $studentWorker, "organization" => $organization);
@@ -67,6 +71,8 @@
             //data into the corresponding table
             $this->load->model('UserDataModel');
             $this->UserDataModel->insert_data($allInfo);
+            
+            $this->load->view('success');
             
 
 
@@ -81,6 +87,24 @@
 
             $this->load->view('home', $person, $address);
 	}
+        
+        function pdf(){
+            $this->output->cache(0);
+            $this->load->helper('pdf_helper');
+            $this->load->model('UserDataModel');
+            
+            $id = $this->session->userdata['username'];
+
+            $data['address'] = $this->UserDataModel->get_address($id);
+            $data['person'] = $this->UserDataModel->get_person($id);
+            $data['applicant'] = $this->UserDataModel->get_applicant($id);
+            $data['ferpa'] = $this->UserDataModel->get_ferpa($id);
+            $data['application'] = $this->UserDataModel->get_appData($id);
+            $data['dropdown'] = $this->UserDataModel->get_dropdown();
+            
+            
+            $this->load->view('pdfreport', $data);
+        }
        
     }
 ?>

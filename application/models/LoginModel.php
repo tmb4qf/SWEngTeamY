@@ -9,19 +9,25 @@
 //            $this->db->where('username', $username);
 //            $this->db->where('password', $password);
             
-            $this->db->select('id', 'password_hash');
+            $this->db->select('id', 'password_hash', 'isProcessor');
             $this->db->from('authentication');
             $this->db->where('id', $username);
             $this->db->where('password_hash', $password);
             
-            $query = $this->db->get();
+            $query = $this->db->query("SELECT * FROM authentication WHERE id='$username' AND password_hash = '$password'");
+            
             
             //checking to see if the query returns a unique row
             if($query->num_rows() == 1){
+                foreach($query->result() as $row){
+                    $proccessor = $row->isProcessor;
+                }
                 //assigning user data to the session
                 $newdata = array(
                                     'username'  => $username,
-                                    'logged_in' => TRUE
+                                    'logged_in' => TRUE,
+                                    'processor' => $proccessor
+                    
                );
 
                 //sets user session data

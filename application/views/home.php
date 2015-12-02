@@ -1,21 +1,25 @@
 <!DOCTYPE html>
         <?php
+        
             
             if(!($this->session->userdata('username'))){
                 redirect("/LoginController");
             }
-            //$records is the data that was passed into this view from the HomePageController.
-            //in order to use the data within $records, $records must be cast as an object and then
-            //the fields can be accessed by the column name of the table where the data comes from
-            //print_r($records);
-//            foreach($records as $rec){
-//                $theferpascore = $rec->score;
-//                $thestreet= $rec->street;
-//                $thezip = $rec->zipcode;
-//                $theState = $rec->state;
-//                $theCity = $rec->city;
-//                $isStudentWorker = $rec->isStudentWorker;
-//            }
+                $pawprint = "";
+                $phoneNum = "";
+                $title = "";
+                $fname = "";
+                $lname = "";  
+                $orgID = "";
+                $isStudentWorker = FALSE;
+                $thestreet = "";
+                $theCity = "";
+                $thezip = "";
+                $theCountry = "";
+                $theState = "";
+                $theferpascore = null;
+                $theID = "";
+
             
             foreach($person as $per){
                 $pawprint = $per->pawprint;
@@ -42,6 +46,19 @@
             foreach($ferpa as $fer){
                 $theferpascore = $fer->score;
             }
+            
+            foreach($application as $appl){
+                $theID = $appl->id;
+            }
+            
+            foreach($dropdown as $key => $value){
+                $theList[$key] = $value->name;
+            }
+           
+            
+            if($theferpascore == null || $theferpascore < 50){
+                redirect("/InvalidFerpa");
+            }
         ?>
 <html lang="en">
 
@@ -50,9 +67,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Security Request Form</title>
-  <link href="/assets/css/bootstrap.slate.css" rel="stylesheet">
+  <link href="<?php echo base_url();?>/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url();?>/assets/js/bootstrap.js"></script>
+  <script src="<?php echo base_url();?>/assets/js/FormValidation.js"></script>
+  
+  <script>
+    $(function(){
+       console.log("JACK! THIS WORK"); 
+    });
+  </script>
 </head>
 
 <body>
@@ -90,7 +114,7 @@
                   <div class="form-group">
                     <label for="ferpa" class="col-lg-3 control-label">FERPA Score:</label>
                     <div class="col-lg-2">
-                      <input type="number" class="form-control" id="ferpa" placeholder="85" name="ferpa" value="<?php print $theferpascore; ?>">%
+                      <input type="number" class="form-control" id="ferpa" placeholder="85" name="ferpa" value="<?php print set_value('ferpa', $theferpascore); ?>">
                     </div>
                   </div>
                   <!--<input type="submit" value ="SUBMIT"/>-->
@@ -109,7 +133,7 @@
             <h3 class="panel-title">User Information</h3>
           </div>
           <div class="panel-body">
-            <?php $attributes = array('class' => 'form-horizontal'); 
+            <?php //$attributes = array('class' => 'form-horizontal'); 
                 //echo form_open('HomePageController/checkUserData', $attributes);
             ?>
             <!--<form class="form-horizontal">-->
@@ -118,31 +142,35 @@
                   <div class="form-group">
                     <label for="username" class="col-lg-3 control-label">User Name</label>
                     <div class="col-lg-9">
-                      <input type="text" value="<?php print $fname . $lname; ?>" name = "username" class="form-control" id="username" placeholder="full legal name">
+                      <input type="text" value="<?php print set_value('username', $fname . $lname); ?>" name = "username" class="form-control" id="username" placeholder="full legal name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
                     <div class="col-lg-9">
-                      <input type="text" value="<?php print $pawprint; ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
+                      <input type="text" value="<?php print set_value('pawprint', $pawprint); ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="emplId" class="col-lg-3 control-label">EmplId</label>
                     <div class="col-lg-9">
-                      <input type="text" name="emplID" class="form-control" id="emplId" placeholder="emplId">
+                      <input type="text" name="emplID" class="form-control" id="emplId" placeholder="emplId" value="<?php //print "$title"; ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="title" class="col-lg-3 control-label">Title</label>
                     <div class="col-lg-9">
-                      <input type="text" value="<?php print $title; ?>" name="title" class="form-control" id="title" placeholder="title">
+                      <input type="text" value="<?php print set_value('title', $title); ?>" name="title" class="form-control" id="title" placeholder="title">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
                     <div class="col-lg-9">
-                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">
+                            
+<!--                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->
+                           <?php
+                           $formAttr = 'type="text" class="form-control" id="organization" class="form-control"';
+                           print form_dropdown('organization', $theList, '0', $formAttr); ?>
                     </div>
                   </div>
                 </div>
@@ -184,7 +212,7 @@
                   <div class="form-group">
                     <label for="phoneNumber" class="col-lg-3 control-label">Phone Number</label>
                     <div class="col-lg-9">
-                      <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number">
+                      <input value="<?php print $phoneNum;?>" type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -279,9 +307,9 @@
                   <div class="form-group">
                     <label for="requestType" class="col-lg-3 control-label">This is a(n): </label>
                     <div class="col-lg-9">
-                      <input type="radio" class="form-control" name="requestType" value="new">New Request
+                        <input <?php print $theID ? "disabled" : "checked";  ?> type="radio" class="form-control" name="requestType" value="new">New Request
                       <br>
-                      <input type="radio" class="form-control" name="requestType" value="additional">Additional Request
+                      <input <?php print $theID ? "checked" : "disabled";  ?> type="radio" class="form-control" name="requestType" value="additional">Additional Request
                       <br>
                     </div>
                   </div>
@@ -296,19 +324,19 @@
                     <div class="row-fluid">
                       <div class="col-md-1"></div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="undergraduate" value="undergraduate">UGRD
+                        <input type="checkbox" class="form-control" name="undergraduate" value=1>UGRD
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="graduate" value="graduate">GRD 
+                        <input type="checkbox" class="form-control" name="graduate" value=2>GRD 
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="medicine" value="medicine">MED 
+                        <input type="checkbox" class="form-control" name="medicine" value=4>MED 
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="veterinarymedicine" value="veterinarymedicine">VETMED 
+                        <input type="checkbox" class="form-control" name="veterinarymedicine" value=8>VETMED 
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="law" value="law">LAW 
+                        <input type="checkbox" class="form-control" name="law" value=16>LAW 
                       </div>
                     </div>
                   </div>
@@ -317,13 +345,13 @@
                       <div class="col-md-1"></div>
                       <div class="col-md-11">
                         <!-- TODO: get to align to label for checkboxes above -->
-                        <label for="" class="control-label">Please describe the type of access needed (i.e. view student name, address, rosters etc.) Please be specific.</label>
+                        <label for="description" class="control-label">Please describe the type of access needed (i.e. view student name, address, rosters etc.) Please be specific.</label>
                       </div>
                     </div>
                     <div class="row-fluid">
                       <div class="col-md-1"></div>
                       <div class="col-md-11">
-                        <textarea class="form-control" rows="5" id="description"></textarea>
+                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
                       </div>
                     </div>
                   </div>
@@ -357,22 +385,22 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="staffId" class="col-lg-3 control-label">Pawprint or SSO</label>
-                        <div class="col-lg-9">
-                          <input type="text" class="form-control" name="staffID" id="staffId" placeholder="staff member's pawprint or SSO">
-                        </div>
-                      </div>
-                      <div class="form-group">
                         <label for="staffEmplID" class="col-lg-3 control-label">EmplId (if known)</label>
                         <div class="col-lg-9">
                           <input type="text" class="form-control" name="staffEmplID" id="staffEmplID" placeholder="staff member's employee ID">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="staffId" class="col-lg-3 control-label">Pawprint or SSO</label>
+                        <div class="col-lg-9">
+                          <input type="text" class="form-control" name="staffID" id="staffId" placeholder="staff member's pawprint or SSO">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Submit" id="submit"/>   
                 <?php echo form_close(); ?>
 
             <!--</form>-->

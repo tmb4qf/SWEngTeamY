@@ -10,7 +10,7 @@
             //pulling out the data from the array and storing it in a individual variable to make writing the insert
             //statements easier. this will have to be done for all of the arrays in the function parameter
             $appID = $this->session->userdata['username'];
-            $isStuWorker = $allInfo['studentWorker'] ? TRUE : FALSE;
+            $isStuWorker = $allInfo['studentWorker'] ? 1 : 0;
             $orgID = $allInfo['organization'];	
             //$addrID = $address['addrID'];
             $street = $allInfo['street'];
@@ -23,15 +23,45 @@
             $phone = $allInfo['phone'];
             $title = $allInfo['title'];
             $type = $allInfo['requestType'];
+            $careerType = $allInfo['careerType'];
+            $careerValue = 0;
+            $org = $allInfo['organization'];
+            $desc = $allInfo['description'];
             
-            $this->db->query("UPDATE ferpaScores SET score = $score WHERE id = '$appID'");
-            $this->db->query("UPDATE person SET fname = 'JACK', lname = 'FAY', pawprint = '$pawprint', phone_number = '$phone', title = '$title' WHERE id = '$appID'");
-            $this->db->query("update applicant SET organizationID = ( SELECT orgID
-                                FROM organization
-                                WHERE name = 'Academic Support Center' ) , isStudentWorker = $isStuWorker 
-                                WHERE id ='$appID'");
+            foreach($careerType as $value){
+                $careerValue += $value;
+            }
+            
             $this->db->query("UPDATE address SET street = '$street', city = '$city', zipcode = '$zip' WHERE addrID = (SELECT addrID FROM person where id = '$appID')");
-            $this->db->query("INSERT into applicationTypes(type) VALUES ('$type')");
+            $this->db->query("UPDATE person SET fname = 'JACK', lname = 'FAY', pawprint = '$pawprint', phone_number = '$phone', title = '$title' WHERE id = '$appID'");
+            $this->db->query("UPDATE ferpaScores SET score = $score WHERE id = '$appID'");
+
+            
+
+            
+            switch ($type){
+                case "new":
+                    $this->db->query("INSERT into application(id, app_type, status, description) VALUES ('$appID', (SELECT typeID FROM applicationTypes"
+                    . " WHERE type = '$type'), 1, $desc)");
+                    
+                    $this->db->query("INSERT into applicant VALUES('$appID', $org+1, $isStuWorker) ");
+                                        $this->db->query("INSERT INTO requestedCareerTypes VALUES ((SELECT appID FROM application WHERE id = '$appID'), '$appID', "
+
+                    . "$careerValue)");                    
+                    break;
+                case "additional":
+                    $this->db->query("UPDATE application SET app_type = 2, status = 1, description = '$desc' WHERE id = '$appID'");
+                    $this->db->query("UPDATE requestedCareerTypes SET typeID = $careerValue WHERE id = '$appID'");
+                    $this->db->query("update applicant SET organizationID = $org+1 , isStudentWorker = $isStuWorker 
+                                WHERE id ='$appID'");
+                    break;
+                default:
+                    break;
+                    
+            }
+            
+
+
             
         }        
 
@@ -64,6 +94,16 @@
         
         public function get_applicant($id){
             $query = $this->db->query("SELECT * FROM applicant WHERE id = '$id'");
+            return $query->result();
+        }
+        
+        public function get_appData($id){
+            $query = $this->db->query("SELECT * FROM application WHERE id = '$id'");
+            return $query->result();
+        }
+        
+        public function get_dropdown(){
+            $query = $this->db->query("SELECT name FROM organization");
             return $query->result();
         }
         
