@@ -17,8 +17,14 @@
 
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Security Request</title>
-	<style>
+	<link href="../../assets/css/bootstrap.slate.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="../../assets/js/bootstrap.min.js"></script>
+	<!--<style>
 	
 	body 
 	{
@@ -85,19 +91,61 @@
 		text-align: center;
 	}
 		
-	</style>
+	</style>-->
 </head>
 <body>
 
 	<br>
 	<br>
 	
-	<br>
-	<h1> Mizzou Security Request </h1>
-	 <?php echo validation_errors(); ?>
-	 <?php echo form_open('LoginController/checkLogin'); ?>
-	<!--<form id="myDiv" action="localhost:8888/swengteamy/index.php/LoginController/checkLogin" method= 'POST'>-->
-	<h2> Sign In </h2>
+	<div class="container">
+		<div class="jumbotron">
+			<h1 align="center"> Mizzou Security Request </h1>
+			<?php echo validation_errors(); ?>
+			<?php echo form_open('LoginController/checkLogin'); ?>
+			<!--<form id="myDiv" action="localhost:8888/swengteamy/index.php/LoginController/checkLogin" method= 'POST'>-->
+		</div>
+		
+		<div class="row-fluid" align="center">
+		  <div class="col-md-7">
+			<div class="panel panel-primary">
+			  <div class="panel-heading">
+				<h3 class="panel-title">Sign In</h3>
+			  </div>
+			  <div class="panel-body">
+				  <div class="row-fluid">
+					  <div class="row-fluid">
+						<div class="col-md-10">
+						<div class="form-group">
+						  <label for="username" class="col-lg-3 control-label">Pawprint</label>
+						  <div class="col-lg-9">
+							<input type="text" name = "username" class="form-control" id="username" placeholder="Pawprint">
+						  </div>
+						</div>
+						<div class="form-group">
+						  <label for="password" class="col-lg-3 control-label">Password</label>
+						  <div class="col-lg-9">
+							<input type="password" name = "password" class="form-control" id="password" placeholder="Password">
+						  </div>
+						</div>
+						</div>
+						<div class="col-md-2"></div>
+					   </div>
+				  </div>
+		
+				  <div class="row-fluid">
+					<div class="col-md-12">
+						<input class="btn btn-primary btn-lg" type = "submit" name= "submit" value = "Login" >
+					</div>
+				  </div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+		
+		
+	<!--<h2> Sign In </h2>
     <fieldset id ="field">
         Employee ID <br> <input type = "text" name = "username"> <br>
 		Password <br> <input type = "password" name = "password">
@@ -106,7 +154,7 @@
 		
 		<br>
 		<br>
-    </fieldset>
+    </fieldset>-->
 	</form>
 	<br>
 
