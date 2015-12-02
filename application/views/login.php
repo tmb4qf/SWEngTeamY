@@ -118,13 +118,13 @@
 						<div class="col-md-10">
 						<div class="form-group">
 						  <label for="username" class="col-lg-3 control-label">Pawprint</label>
-						  <div class="col-lg-9">
+						  <div class="col-lg-9" style="padding-bottom: 10px">
 							<input type="text" name = "username" class="form-control" id="username" placeholder="Pawprint">
 						  </div>
 						</div>
 						<div class="form-group">
 						  <label for="password" class="col-lg-3 control-label">Password</label>
-						  <div class="col-lg-9">
+						  <div class="col-lg-9" style="padding-bottom: 10px">
 							<input type="password" name = "password" class="form-control" id="password" placeholder="Password">
 						  </div>
 						</div>
