@@ -108,38 +108,43 @@
 		
 		<div class="row-fluid" align="center">
 		  <div class="col-md-7">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">
-				<h3 class="panel-title">Sign In</h3>
-			  </div>
-			  <div class="panel-body">
-				  <div class="row-fluid">
-					  <div class="row-fluid">
-						<div class="col-md-10">
-						<div class="form-group">
-						  <label for="username" class="col-lg-3 control-label">Pawprint</label>
-						  <div class="col-lg-9" style="padding-bottom: 10px">
-							<input type="text" name = "username" class="form-control" id="username" placeholder="Pawprint">
-						  </div>
-						</div>
-						<div class="form-group">
-						  <label for="password" class="col-lg-3 control-label">Password</label>
-						  <div class="col-lg-9" style="padding-bottom: 10px">
-							<input type="password" name = "password" class="form-control" id="password" placeholder="Password">
-						  </div>
-						</div>
-						</div>
-						<div class="col-md-2"></div>
-					   </div>
+		  <div class="row-fluid">
+			  <div class="col-md-1"></div>
+			  <div class="col-md-10">
+				<div class="panel panel-primary">
+				  <div class="panel-heading">
+					<h3 class="panel-title">Sign In</h3>
 				  </div>
-		
-				  <div class="row-fluid">
-					<div class="col-md-12">
-						<input class="btn btn-primary btn-lg" type = "submit" name= "submit" value = "Login" >
-					</div>
-				  </div>
+				  
+					  <div class="panel-body">
+						  <div class="row-fluid">
+								<div class="col-md-10">
+								<div class="form-group">
+								  <label for="username" class="col-lg-3 control-label">Pawprint</label>
+								  <div class="col-lg-9" style="padding-bottom: 10px">
+									<input type="text" name = "username" class="form-control" id="username" placeholder="Pawprint">
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label for="password" class="col-lg-3 control-label">Password</label>
+								  <div class="col-lg-9" style="padding-bottom: 10px">
+									<input type="password" name = "password" class="form-control" id="password" placeholder="Password">
+								  </div>
+								</div>
+								<div class="row-fluid">
+									<div class="col-md-12">
+										<input class="btn btn-primary btn-lg" type = "submit" name= "submit" value = "Login" >
+									</div>
+								  </div>
+								</div>
+								<div class="col-md-1"></div>
+							   </div>
+						  </div>
 				</div>
-			</div>
+			  </div>
+			  <div class="col-md-1"></div>
+		  </div> 
+		  </div>
 		  </div>
 		</div>
 	</div>
