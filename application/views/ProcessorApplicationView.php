@@ -84,7 +84,7 @@
 
 <body>
   <div class="container">
-    <?php echo anchor('LogoutController', 'Logout'); ?>
+    <?php echo "<a href=\"".base_url()."index.php/LogoutController\" class=\"btn btn-primary\">Logout</a>";?>
     <div class="jumbotron">
       <h1>myZou SECURITY Request Form</h1>
       <p>University of Missouri, Columbia</p>
@@ -170,7 +170,7 @@
                     <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
                     <div class="col-lg-9">
                             
-<!--                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->
+  <!--<input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->
                            <?php
                            $formAttr = 'type="text" class="form-control" id="organization" class="form-control"';
                            print form_dropdown('organization', $theList, '0', $formAttr); ?>

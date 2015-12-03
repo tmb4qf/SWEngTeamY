@@ -84,7 +84,8 @@
 
 <body>
   <div class="container">
-    <?php echo anchor('LogoutController', 'Logout'); ?>
+    <?php echo "<a href=\"".base_url()."index.php/LogoutController\" class=\"btn btn-primary\">Logout</a>";?>
+
     <div class="jumbotron">
       <h1>myZou SECURITY Request Form</h1>
       <p>University of Missouri, Columbia</p>
