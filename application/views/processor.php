@@ -2,7 +2,10 @@
 <html>
     <head>
         <title>Processing Page</title>
-        <style>
+        <link href="<?php echo base_url();?>/assets/css/bootstrap.slate.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="<?php echo base_url();?>/assets/js/bootstrap.js"></script>
+        <!--<style>
             div{
                 width: 400px;
                 float: left;
@@ -35,35 +38,44 @@
       
             }
             
-        </style>
+        </style>-->
     </head>
     <body>
-        <table>
-            <tr>
-                <th>Application</th>
-                <th>Applicant ID</th>
-                <th>Description</th>
-                <th>Status</th>
-            </tr>
-        <?php
+        <div class="row-fluid">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
 
-//    foreach($requests as $req){
-//        print $req->appID . " ";
-//        print $req->id . " ";
-//        print $req->desc . " ";
-//        print "<br>";
-//    }
+                <table class="table table-hover">
+                    <tr>
+                        <th>Application</th>
+                        <th>Applicant ID</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                    <?php
 
-    foreach($requests as $req){
-        //print "<a href =\"\">" . "$req->appID" . " " . "$req->id" . " " . "$req->desc";
-        print "<tr><td>" . anchor("ViewRequestController?applicantID=$req->id", "<button>Select</button>") . "</td>";
-        print "<td>" . $req->id . "</td>";
-        print "<td>" .$req->description . "</td>";
-        print "<td>" .$req->status . "</td></tr>";
-    }
-    
-?>
-    </table>
+                    //    foreach($requests as $req){
+                    //        print $req->appID . " ";
+                    //        print $req->id . " ";
+                    //        print $req->desc . " ";
+                    //        print "<br>";
+                    //    }
+
+                        foreach($requests as $req){
+                            if($req->status==1) $status = "Pending";
+                            elseif($req->status==2) $status = "Accepted";
+                            else $status = "Not submitted yet";
+
+                            print "<tr><td><a href=\"".base_url()."index.php/ViewRequestController?applicantID=".$req->id."\" class=\"btn btn-primary\">Select</a>". "</td>";
+                            print "<td>" .$req->id."</td>";
+                            print "<td>" .$req->description."</td>";
+                            print "<td>" .$status."</td></tr>";
+                        }
+                    ?>
+                </table>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
     </body>
     
     
