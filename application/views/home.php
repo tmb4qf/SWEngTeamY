@@ -77,7 +77,7 @@
   
   <script>
     $(function(){
-       console.log("JACK! THIS WORK"); 
+       //console.log("JACK! THIS WORK"); 
     });
   </script>
 </head>
@@ -89,7 +89,7 @@
       <h1>myZou SECURITY Request Form</h1>
       <p>University of Missouri, Columbia</p>
       <!-- TODO: add popup modal with instructions when button is selected-->
-      <p><a class="btn btn-primary btn-lg">Instructions</a></p>
+      <p><a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Instructions</a></p>
     </div>
 
      <!-- Modal -->
