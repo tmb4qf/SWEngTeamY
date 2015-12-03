@@ -36,7 +36,7 @@ var questions = [{
 }, {
     id: 'zip',
     isRequired: true,
-    error: 'Please enetr your city'
+    error: 'Please enter your city'
 }, {
     id: 'phoneNumber',
     isRequired: true,
@@ -62,6 +62,7 @@ function submitForm() {
     $.each(questions, function() {
         if (this.isRequired && $("#" + this.id).val() == "") {
             $("#" + this.id).after(errorMessage(this.error ? this.error : "Required"));
+            //$("#" + this.id").focus();
             errors = true;
         }
     });
