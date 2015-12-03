@@ -182,36 +182,36 @@
                 <div class="form-group">
                   <label for="fname" class="col-lg-3 control-label">First Name</label>
                   <div class="col-lg-9">
-                    <input type="text" name = "fname" class="form-control" id="fname" placeholder="last name" value="<?php print $fname; ?>">
+                    <input required type="text" name = "fname" class="form-control" id="fname" placeholder="first name" value="<?php print $fname; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="lname" class="col-lg-3 control-label">Last Name</label>
                   <div class="col-lg-9">
-                    <input type="text" name = "lname" class="form-control" id="lname" placeholder="first name" value="<?php print $lname; ?>">
+                    <input required type="text" name = "lname" class="form-control" id="lname" placeholder="last name" value="<?php print $lname; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
                   <div class="col-lg-9">
-                    <input type="text" value="<?php print $pawprint; ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
+                    <input required type="text" value="<?php print $pawprint; ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="emplId" class="col-lg-3 control-label">EmplId</label>
                   <div class="col-lg-9">
-                    <input type="text" value="<?php print "1111111"; ?>"name="emplID" class="form-control" id="emplId" placeholder="emplId">
+                    <input required type="text" value="<?php print "1111111"; ?>"name="emplID" class="form-control" id="emplId" placeholder="emplId">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="title" class="col-lg-3 control-label">Title</label>
                   <div class="col-lg-9">
-                    <input type="text" value="<?php print $title; ?>" name="title" class="form-control" id="title" placeholder="title">
+                    <input required type="text" value="<?php print $title; ?>" name="title" class="form-control" id="title" placeholder="title">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
-                  <div class="col-lg-9">
+                  <div class="col-lg-9">            
                     <!--<input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->                         
 <!--                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->
                            <?php
@@ -231,7 +231,7 @@
                     <div class="form-group">
                       <label for="street2" class="col-lg-3 control-label">Street</label>
                       <div class="col-lg-9">
-                          <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
+                          <input required type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
                       </div>
                       <div class="col-lg-3"></div>
                       <div class="col-lg-9">
@@ -241,13 +241,13 @@
                     <div class="form-group">
                       <label for="city" class="col-lg-3 control-label">City</label>
                       <div class="col-lg-9">
-                        <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>">
+                        <input required type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="zip" class="col-lg-3 control-label">Zip Code</label>
                       <div class="col-lg-9">
-                        <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>">
+                        <input required type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>">
                       </div>
                   </div>
                 </div>
@@ -258,13 +258,13 @@
                 <div class="form-group">
                   <label for="phoneNumber" class="col-lg-3 control-label">Phone Number</label>
                   <div class="col-lg-9">
-                    <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number" value="<?php print $phoneNum;?>">
+                    <input required type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number" value="<?php print $phoneNum;?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="studentWorker" class="col-lg-3 control-label">I am a student worker</label>
                   <div class="col-lg-9">
-                    <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker" <?php print $isStudentWorker ? "checked" : "" ?>>
+                    <input required type="checkbox" name="studentWorker" class="form-control" id="studentWorker" <?php print $isStudentWorker ? "checked" : "" ?>>
                   </div>
                 </div>
               </div>
