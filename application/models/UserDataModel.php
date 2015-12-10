@@ -10,7 +10,7 @@
             //pulling out the data from the array and storing it in a individual variable to make writing the insert
             //statements easier. this will have to be done for all of the arrays in the function parameter
 
-            $appID = $this->session->userdata['username'];
+            $appID = $allInfo['pawprint'];
             $isStuWorker = $allInfo['studentWorker'] ? 1 : 0;
             $orgID = $allInfo['organization'];	
             //$addrID = $address['addrID'];
@@ -30,6 +30,10 @@
             $desc = $allInfo['description'];
             $fname = $allInfo['fname'];
             $lname = $allInfo['lname'];
+            $admissions = $allInfo['admissions'];
+            $students = $allInfo['students'];
+            $reserved = $allInfo['reserved'];
+            $financial = $allInfo['financial'];
             
             foreach($careerType as $value){
                 $careerValue += $value;
@@ -44,16 +48,22 @@
             
             switch ($type){
                 case "new":
-                    $this->db->query("INSERT into application(id, app_type, status, description) VALUES ('$appID', (SELECT typeID FROM applicationTypes"
-                    . " WHERE type = '$type'), 1, $desc)");
+                    $this->db->query("INSERT into application(id, app_type, status, description, studentRecordsAccess,"
+                            . " admissionsAccess, studentFinancialAidAccess, reservedAccess) VALUES ('$appID',"
+                            . " (SELECT typeID FROM applicationTypes"
+                    . " WHERE type = '$type'), 1, $desc, $students, $admissions, $financial, $reserved)");
                     
                     $this->db->query("INSERT into applicant VALUES('$appID', $org+1, $isStuWorker) ");
                                         $this->db->query("INSERT INTO requestedCareerTypes VALUES ((SELECT appID FROM application WHERE id = '$appID'), '$appID', "
 
-                    . "$careerValue)");                    
+                    . "$careerValue)");
+                                        
                     break;
                 case "additional":
-                    $this->db->query("UPDATE application SET app_type = 2, status = 1, description = '$desc' WHERE id = '$appID'");
+                    $this->db->query("UPDATE application SET app_type = 2, status = 1, description = '$desc',"
+                            . "studentRecordsAccess = $students, admissionsAccess = $admissions, "
+                            . "studentFinancialAidAccess = $financial, reservedAccess = $reserved"
+                            . " WHERE id = '$appID'");
                     $this->db->query("UPDATE requestedCareerTypes SET typeID = $careerValue WHERE id = '$appID'");
                     $this->db->query("update applicant SET organizationID = $org+1 , isStudentWorker = $isStuWorker 
                                 WHERE id ='$appID'");
@@ -82,6 +92,11 @@
 //            $query = $this->db->get();
             $query = $this->db->query("SELECT * FROM address WHERE addrID ="
                     . "(SELECT addrID FROM person WHERE id = '$id')");
+            return $query->result();
+        }
+        
+        public function get_application($id){
+            $query = $this->db->query("SELECT * FROM application WHERE id = '$id'");
             return $query->result();
         }
         
@@ -233,6 +248,167 @@
 
 			// Produces: INSERT INTO admissionsTestRequest (admTestID, applicationID, admTypeID) VALUES (DEFAULT, $appID, $admTypeID)
 		}
+                
+                
+                
+                public function get_careers($id){
+                    $query = $this->db->query("SELECT typeID FROM requestedCareerTypes WHERE id='$id'");
+                    $sumArray = $query->result();
+                    $sum = $sumArray[0]->typeID;
+                    $binarySum = decbin($sum);
+                    $binaryArray = str_split($binarySum);
+                        while(count($binaryArray) < 5){
+                            array_splice($binaryArray, 0, 0, 0);
+                        }
+                    
+                    $decArray = array(0=>1);
+                    $x = 1;
+                    while($x < count($binaryArray)){
+                        $decArray[$x] = $decArray[$x-1] * 2;
+                        $x++;
+                    }
+    
+                    $decArray = array_reverse($decArray);
+                    $newArray = array();
+                    
+                    
+                    
+                    foreach($binaryArray as $i => $value){
+                        if($value == 1){
+                             $newArray[$i] = $decArray[$i];
+                        }else{
+                            $newArray[$i] = 0;
+                        }          
+                    }
+
+                    return $newArray;
+                    
+                }
+                
+                public function get_checkboxes($field, $id, $roleType){
+                    $query = $this->db->query("SELECT $field as 'value' FROM application WHERE id='$id'");
+                    $sumArray = $query->result();
+                    $sum = $sumArray[0]->value;
+                    $binarySum = decbin($sum);
+                    $binaryArray = str_split($binarySum);
+                    $endA = $this->count_boxes($roleType);
+                    $end = $endA[0]->value * 2;
+                    while(count($binaryArray) < $end){
+                        array_splice($binaryArray, 0, 0, 0);
+                    }
+                    $decArray = array(0=>1);
+                    $x = 1;
+                    while($x < count($binaryArray)){
+                        $decArray[$x] = $decArray[$x-1] * 2;
+                        $x++;
+                    }
+    
+                    $decArray = array_reverse($decArray);
+                    $newArray = array();
+                    
+                    
+                    
+                    foreach($binaryArray as $i => $value){
+                        if($value == 1){
+                             $newArray[$i] = $decArray[$i];
+                        }else{
+                            $newArray[$i] = 0;
+                        }          
+                    }
+
+                    return $binaryArray;
+                    
+                }
+                
+                public function get_admissions_checkboxes($id){
+                    $query = $this->db->query("SELECT admissionsAccess as 'value' FROM application WHERE id='$id'");
+                    $sumArray = $query->result();
+                    $sum = $sumArray[0]->value;
+                    $binarySum = decbin($sum);
+                    $binaryArray = str_split($binarySum);
+                        while(count($binaryArray) < 15){
+                            array_splice($binaryArray, 0, 0, 0);
+                        }
+                    
+                    $decArray = array(0=>1);
+                    $x = 1;
+                    while($x < count($binaryArray)){
+                        $decArray[$x] = $decArray[$x-1] * 2;
+                        $x++;
+                    }
+    
+                    $decArray = array_reverse($decArray);
+                    $newArray = array();
+                    
+                    
+                    
+                    foreach($binaryArray as $i => $value){
+                        if($value == 1){
+                             $newArray[$i] = $decArray[$i];
+                        }else{
+                            $newArray[$i] = 0;
+                        }          
+                    }
+
+                    return $binaryArray;
+                }
+                
+                public function count_boxes($roleType){
+                    $query = $this->db->query("SELECT count(roleID) as 'value' FROM roles WHERE roleType = $roleType");
+                    return $query->result();
+                }
+                
+                
+                public function get_admissions(){
+                    $query = $this->db->query("SELECT * FROM admissionsTestTypes");
+                    return $query->result();
+                }
+                
+                public function get_student_records_access(){
+                    $query = $this->db->query("SELECT * FROM roles WHERE roleType = 1");
+                    return $query->result();
+                }
+                
+                public function get_student_aid(){
+                    $query = $this->db->query("SELECT * FROM roles WHERE roleType = 3");
+                    return $query->result();
+                }
+                
+                public function get_reserved_access(){
+                    $query = $this->db->query("SELECT * FROM roles WHERE roleType = 4");
+                    return $query->result();
+                }
+                
+                public function count_admissions(){
+                    $query = $this->db->query("SELECT count(typeID) as 'value' FROM admissionsTestTypes");
+                    return $query->result();
+                }
+                
+                public function count_records(){
+                    $query = $this->db->query("SELECT count(roleID) as 'value' FROM roles WHERE roleType = 1");
+                    return $query->result();
+                }
+                
+                public function count_reserved(){
+                    $query = $this->db->query("SELECT count(roleID) as 'value' FROM roles WHERE roleType = 4");
+                    return $query->result();
+                }
+                
+                public function reserved_BegID(){
+                    $query = $this->db->query("select roleID from roles where roleType = 4 limit 1;");
+                    return $query->result();
+                }
+                
+                public function count_financialAid(){
+                    $query = $this->db->query("SELECT count(roleID) as 'value' FROM roles WHERE roleType = 3");
+                    return $query->result();
+                    
+                }
+                
+                public function financial_BegID(){
+                    $query = $this->db->query("select roleID from roles where roleType = 3 limit 1;");
+                    return $query->result();
+                }
     }
 ?>
  

@@ -2,7 +2,6 @@
 <!--<html>
     <head><title></title></head>
     <body>
-
         <h1>Login Page</h1>
         <?php //echo form_open('LoginController/checkLogin'); ?>
         
@@ -21,9 +20,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Security Request</title>
-	<link href="../../assets/css/bootstrap.slate.css" rel="stylesheet">
+	<link href="<?php print base_url(); ?>/assets/css/bootstrap.slate.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../../assets/js/bootstrap.min.js"></script>
+	<script src="<?php print base_url(); ?>/assets/js/bootstrap.min.js"></script>
 	<!--<style>
 	
 	body 
@@ -51,7 +50,6 @@
 		background-color: #999966;
 		font-size: 20px;
 	}
-
 	#field
 	{
 		text-align: center;
@@ -101,45 +99,51 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1 align="center"> Mizzou Security Request </h1>
-			<?php echo validation_errors(); ?>
 			<?php echo form_open('LoginController/checkLogin'); ?>
 			<!--<form id="myDiv" action="localhost:8888/swengteamy/index.php/LoginController/checkLogin" method= 'POST'>-->
 		</div>
 		
 		<div class="row-fluid" align="center">
-		  <div class="col-md-7">
+		  <div class="col-md-1"></div>
+		  <div class="col-md-10">
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
 				<h3 class="panel-title">Sign In</h3>
 			  </div>
+			  <span class="text-danger">
+				  <?php echo validation_errors(); ?>
+				  
+			  </span>
 			  <div class="panel-body">
 				  <div class="row-fluid">
-					  <div class="row-fluid">
+						<div class="col-md-1"></div>
 						<div class="col-md-10">
-						<div class="form-group">
-						  <label for="username" class="col-lg-3 control-label">Pawprint</label>
-						  <div class="col-lg-9" style="padding-bottom: 10px">
-							<input type="text" name = "username" class="form-control" id="username" placeholder="Pawprint">
-						  </div>
+							<div class="form-group">
+							  <label for="username" class="control-label">Pawprint</label>
+							  <div class="" style="padding-bottom: 10px">
+								<input type="text" name = "username" class="form-control" id="username" placeholder="Pawprint">
+							  </div>
+							</div>
+							<div class="form-group">
+							  <label for="password" class=" control-label">Password</label>
+							  <div class="" style="padding-bottom: 10px">
+								<input type="password" name = "password" class="form-control" id="password" placeholder="Password">
+							  </div>
+							</div>
+							<div class="row-fluid">
+								<div class="">
+									<input class="btn btn-primary btn-lg" type = "submit" name= "submit" value = "Login" >
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-						  <label for="password" class="col-lg-3 control-label">Password</label>
-						  <div class="col-lg-9" style="padding-bottom: 10px">
-							<input type="password" name = "password" class="form-control" id="password" placeholder="Password">
-						  </div>
-						</div>
-						</div>
-						<div class="col-md-2"></div>
-					   </div>
+						<div class="col-md-1"></div>
 				  </div>
-		
-				  <div class="row-fluid">
-					<div class="col-md-12">
-						<input class="btn btn-primary btn-lg" type = "submit" name= "submit" value = "Login" >
-					</div>
-				  </div>
-				</div>
+			  </div>
 			</div>
+		  </div>
+		  <div class="col-md-1"></div>
+		</div> 
+		  </div>
 		  </div>
 		</div>
 	</div>

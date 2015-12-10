@@ -5,6 +5,13 @@
             if(!($this->session->userdata('username'))){
                 redirect("/LoginController");
             }
+            
+                $reservedChecks = array_reverse($reservedChecks);
+                $studentChecks = array_reverse($studentChecks);
+                $financialChecks = array_reverse($financialChecks);
+                $admissionsChecks = array_reverse($admissionsChecks);
+                //print_r($studentChecks);
+                
 
                 $pawprint = "";
                 $phoneNum = "";
@@ -22,6 +29,7 @@
                 $theStreet = "";
 
             
+            $desc = $app[0]->description;
             foreach($person as $per){
                 $pawprint = $per->pawprint;
                 $phoneNum = $per->phone_number;
@@ -181,25 +189,25 @@
                 <div class="form-group">
                   <label for="fname" class="col-lg-3 control-label">First Name</label>
                   <div class="col-lg-9">
-                    <input type="text" name = "fname" class="form-control" id="fname" placeholder="last name" value="<?php print $fname; ?>">
+                    <input required type="text" name = "fname" class="form-control" id="fname" placeholder="first name" value="<?php print $fname; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="lname" class="col-lg-3 control-label">Last Name</label>
                   <div class="col-lg-9">
-                    <input type="text" name = "lname" class="form-control" id="lname" placeholder="first name" value="<?php print $lname; ?>">
+                    <input required type="text" name = "lname" class="form-control" id="lname" placeholder="last name" value="<?php print $lname; ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="pawprint" class="col-lg-3 control-label">Pawprint or SSO</label>
                   <div class="col-lg-9">
-                    <input type="text" value="<?php print $pawprint; ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
+                    <input required type="text" value="<?php print $pawprint; ?>" name = "pawprint" class="form-control" id="pawprint" placeholder="pawprint or SSO">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="emplId" class="col-lg-3 control-label">EmplId</label>
                   <div class="col-lg-9">
-                    <input type="text" value="<?php print "1111111"; ?>"name="emplID" class="form-control" id="emplId" placeholder="emplId">
+                    <input required type="text" value="<?php print "1111111"; ?>"name="emplID" class="form-control" id="emplId" placeholder="emplId">
                   </div>
                 </div>
                 <div class="form-group">
@@ -240,13 +248,13 @@
                     <div class="form-group">
                       <label for="city" class="col-lg-3 control-label">City</label>
                       <div class="col-lg-9">
-                        <input type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>">
+                        <input required type="text" name="city" class="form-control" id="city" placeholder="city" value="<?php echo $theCity;  ?>">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="zip" class="col-lg-3 control-label">Zip Code</label>
                       <div class="col-lg-9">
-                        <input type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>">
+                        <input required type="text" name="zip" class="form-control" id="zip" placeholder="zip" value="<?php echo $theZip;?>">
                       </div>
                   </div>
                 </div>
@@ -257,7 +265,7 @@
                 <div class="form-group">
                   <label for="phoneNumber" class="col-lg-3 control-label">Phone Number</label>
                   <div class="col-lg-9">
-                    <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number" value="<?php print $phoneNum;?>">
+                    <input required type="text" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="phone number" value="<?php print $phoneNum;?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -313,19 +321,19 @@
                     <div class="row-fluid">
                       <div class="col-md-1"></div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="undergraduate" value=1>UGRD
+                        <input <?php print $careerType[4] == 0 ? "" : "checked"; ?> type="checkbox" class="form-control" name="undergraduate" value=1>UGRD
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="graduate" value=2>GRD 
+                        <input <?php print $careerType[3] == 0 ? "" : "checked"; ?> type="checkbox" class="form-control" name="graduate" value=2>GRD 
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="medicine" value=4>MED 
+                        <input <?php print $careerType[2] == 0 ? "" : "checked"; ?> type="checkbox" class="form-control" name="medicine" value=4>MED 
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="veterinarymedicine" value=8>VETMED 
+                        <input <?php print $careerType[1] == 0 ? "" : "checked"; ?> type="checkbox" class="form-control" name="veterinarymedicine" value=8>VETMED 
                       </div>
                       <div class="col-lg-2">
-                        <input type="checkbox" class="form-control" name="law" value=16>LAW 
+                        <input type="checkbox" class="form-control" name="law" value=16 <?php print $careerType[0] == 0 ? "" : "checked"; ?>>LAW 
                       </div>
                     </div>
                   </div>
@@ -340,7 +348,7 @@
                     <div class="row-fluid">
                       <div class="col-md-1"></div>
                       <div class="col-md-11">
-                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                        <textarea class="form-control" rows="5" id="description" name="description"><?php print $desc; ?></textarea>
                       </div>
                     </div>
                   </div>
@@ -386,8 +394,7 @@
                 </div>
               </div>
 
-                <input type="submit" value="Submit" id="submit"/>   
-                <?php echo form_close(); ?>
+                
 
             <!--</form>-->
           </div>
@@ -412,76 +419,55 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Basic Inquiry</td>
-                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
-                  <td>
-                    <div class="checkbox">
+                        <?php
+                        $x = 1;
+                        $y=2;
+                        $z = 0;
+                        $b=1;
+                foreach($studentrecords as $sr){
+    $view = $sr->isViewable;
+                    $update = $sr->isUpdateable;
+                    
+                    if($view == 0){
+                        $view = "disabled";
+                    }else{
+                        $view = "";
+                    }
+                    
+                    if($update == 0){
+                        $update = "disabled";
+                    }else{
+                        $update = "";
+                    }
+                    if(isset($studentChecks[$z])){
+                        $r1 = $studentChecks[$z] == 0 ? "" : "checked";
+                    }
+                    if(isset($studentChecks[$b])){
+                        $r2 = $studentChecks[$b] == 0 ? "" : "checked";
+                    }
+                    
+                print 
+               
+                "<tr>
+                  <td>" . $sr->roleName . "</td>
+                  <td>" . $sr->roleDesc . "</td>"
+                  . "<td>
+                    <div class=\"checkbox\">
                       <label>
-                        <input type="checkbox"> View
+                        <input " . $r1 . "  name=\"studentview". $sr->roleID ."\"type=\"checkbox\" value=\"$x\"". $view . ">View
                       </label>
                       <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Advanced Inquiry</td>
-                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3Cs</td>
-                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Advisor Update</td>
-                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
+                        <input " . $r2 . "  name=\"studentupdate". $sr->roleID . "\"type=\"checkbox\" value=\"$y\"" .$update ."> Update
                       </label>
                     </div>
                   </td>
-                </tr>
-                <tr>
-                  <td>Department SOC Update</td>
-                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
+                </tr>";
+                $x = $x*4;
+                    $y = $y*4;
+                    $z+=2;
+                    $b+=2;
+                }
+               ?>
               </tbody>
             </table>
           </div>
@@ -500,27 +486,37 @@
             <table class="table table-striped table-hover ">
               <thead>
                 <tr>
-                  <th>Role</th>
-                  <th>Role Description</th>
-                  <th>Access Type</th>
+                  <th>Test</th>
+                  <th>Permission Needed?</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Basic Inquiry</td>
-                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
-                  <td>
-                    <div class="checkbox">
+                <?php
+                $x=1;
+                $z=0;
+                foreach($admissions as $role){
+                    if(isset($admissionsChecks[$z])){
+                        $r1 = $admissionsChecks[$z] == 0 ? "" : "checked";
+                    }
+                    
+                    
+                print 
+               
+                "<tr>
+                  <td>" . $role->name . "</td>"
+                  . "<td>
+                    <div class=\"checkbox\">
                       <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
+                        <input " . $r1 . " name=\"admissions". $role->typeID ."\"type=\"checkbox\" value=\"$x\">
                       </label>
                     </div>
                   </td>
-                </tr>
-                <tr>
+                </tr>";
+                $x*=2;
+                $z++;
+                }
+               ?>
+<!--                <tr>
                   <td>Advanced Inquiry</td>
                   <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
                   <td>
@@ -582,7 +578,7 @@
         </div>
       </div>
     </div>
-    <!-- Cashiers -->
+     Cashiers 
     <div class="row-fluid">
       <div class="col-md-12">
         <div class="panel panel-primary">
@@ -590,7 +586,7 @@
             <h3 class="panel-title">Student Financials (Cashiers) Access</h3>
           </div>
           <div class="panel-body">
-            <!-- TODO: complete panel content -->
+             TODO: complete panel content 
             <table class="table table-striped table-hover ">
               <thead>
                 <tr>
@@ -669,7 +665,7 @@
                       </label>
                     </div>
                   </td>
-                </tr>
+                </tr>-->
               </tbody>
             </table>
           </div>
@@ -694,76 +690,56 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Basic Inquiry</td>
-                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
-                  <td>
-                    <div class="checkbox">
+               <?php
+                $x = 1;
+                $y=2;
+                $z=0;
+                $b=1;
+                foreach($studentaid as $sa){
+                $view = $sa->isViewable;
+                    $update = $sa->isUpdateable;
+                    
+                    if($view == 0){
+                        $view = "disabled";
+                    }else{
+                        $view = "";
+                    }
+                    
+                    if($update == 0){
+                        $update = "disabled";
+                    }else{
+                        $update = "";
+                    }
+                    
+                    if(isset($reservedChecks[$z])){
+                        $r1 = $financialChecks[$z] == 0 ? "" : "checked";
+                    }
+                    if(isset($studentChecks[$b])){
+                        $r2 = $financialChecks[$b] == 0 ? "" : "checked";
+                    }
+                    
+                print 
+               
+                "<tr>
+                  <td>" . $sa->roleName . "</td>
+                  <td>" . $sa->roleDesc . "</td>"
+                  . "<td>
+                    <div class=\"checkbox\">
                       <label>
-                        <input type="checkbox"> View
+                        <input " . $r1 . " name=\"financialview". $sa->roleID ."\"type=\"checkbox\" value=\"$x\"". $view . ">View
                       </label>
                       <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Advanced Inquiry</td>
-                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3Cs</td>
-                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Advisor Update</td>
-                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
+                        <input " . $r2 . " name=\"financialupdate". $sa->roleID . "\"type=\"checkbox\" value=\"$y\"" .$update ."> Update
                       </label>
                     </div>
                   </td>
-                </tr>
-                <tr>
-                  <td>Department SOC Update</td>
-                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
+                </tr>";
+                $x = $x*4;
+                    $y = $y*4;
+                   $z+=2;
+                   $b+=2;
+                }
+               ?>
               </tbody>
             </table>
           </div>
@@ -783,81 +759,62 @@
               <thead>
                 <tr>
                   <th>Role</th>
-                  <th>Role Description</th>
                   <th>Access Type</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Basic Inquiry</td>
-                  <td>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..</td>
-                  <td>
-                    <div class="checkbox">
+                             <?php
+                 $x = 1;
+                 $y=2;
+                 $z=0;
+                 $b=1;
+                foreach($reserved as $rs){
+                    
+                    $view = $rs->isViewable;
+                    $update = $rs->isUpdateable;
+                    
+                    if($view == 0){
+                        $view = "disabled";
+                    }else{
+                        $view = "";
+                    }
+                    
+                    if($update == 0){
+                        $update = "disabled";
+                    }else{
+                        $update = "";
+                    }
+                    
+                    if(isset($reservedChecks[$z])){
+                    $r1 = $reservedChecks[$z] == 0 ? "" : "checked";
+                    }
+                    if(isset($reservedChecks[$b])){
+                    $r2 = $reservedChecks[$b] == 0 ? "" : "checked";
+                    }
+
+                    
+                print 
+               
+                "<tr>
+                  <td>" . $rs->roleName . "</td>
+                  <td></td>"
+                  . "<td>
+                    <div class=\"checkbox\">
                       <label>
-                        <input type="checkbox"> View
+                        <input " . $r1 . " name=\"reservedview". $rs->roleID ."\"type=\"checkbox\" value=\"$x\"". $view . ">View
                       </label>
                       <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Advanced Inquiry</td>
-                  <td>Look, having nuclear—my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart—you know, if you’re a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world—it’s true!</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3Cs</td>
-                  <td>So under President Trump, here’s what would happen: The head of Ford will call me back, I would say within an hour after I told him the bad news, but it could be he’d want to be cool and he’ll wait until the next day. You know, they want to be a little cool.</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Advisor Update</td>
-                  <td>Bacon ipsum dolor amet brisket shoulder fatback biltong cow. Ham hock andouille jowl kielbasa. Flank t-bone doner leberkas pork chop tenderloin cupim pork belly short ribs venison shoulder beef. </td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
+                        <input " . $r2 . " name=\"reservedupdate". $rs->roleID . "\"type=\"checkbox\" value=\"$y\"" .$update ."> Update
                       </label>
                     </div>
                   </td>
-                </tr>
-                <tr>
-                  <td>Department SOC Update</td>
-                  <td>Bacon ipsum dolor amet ipsum incididunt nulla pancetta, pariatur velit dolore sint. Mollit ground round deserunt chuck ut turkey cupim commodo beef ribs non tri-tip laborum biltong. Reprehenderit picanha nisi turducken, aliquip ham hock voluptate cupidatat irure rump.</td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> View
-                      </label>
-                      <label>
-                        <input type="checkbox"> Update
-                      </label>
-                    </div>
-                  </td>
-                </tr>
+                </tr>";
+                $x = $x*4;
+                    $y = $y*4;
+                    $z+=2;
+                    $b+=2;
+                }
+               ?>
               </tbody>
             </table>
           </div>
@@ -868,7 +825,8 @@
     <!-- submit -->
     <div class="row-fluid">
       <div class="col-md-12">
-        <a class="btn btn-primary btn-lg" onclick="submitForm()">Submit</a>
+        <input class="btn btn-primary btn-lg" type="submit" value="Submit" id="submit" onclick="submitForm()"/>   
+                <?php echo form_close(); ?>
       </div>
     </div>
   </div>

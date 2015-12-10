@@ -9,13 +9,23 @@
             $data['address'] = $this->UserDataModel->get_address($id);
             $data['person'] = $this->UserDataModel->get_person($id);
             $data['applicant'] = $this->UserDataModel->get_applicant($id);
+            $data['app'] = $this->UserDataModel->get_application($id);
             $data['ferpa'] = $this->UserDataModel->get_ferpa($id);
             $data['application'] = $this->UserDataModel->get_appData($id);
             $data['dropdown'] = $this->UserDataModel->get_dropdown();
+            $data['careerType'] = $this->UserDataModel->get_careers($id);
+            $data['admissions'] = $this->UserDataModel->get_admissions();
+            $data['studentrecords'] = $this->UserDataModel->get_student_records_access();
+            $data['studentaid'] = $this->UserDataModel->get_student_aid();
+            $data['reserved'] = $this->UserDataModel->get_reserved_access();
+            $data['studentChecks'] = $this->UserDataModel->get_checkboxes("studentRecordsAccess", $id, 1);
+            $data['admissionsChecks'] = $this->UserDataModel->get_admissions_checkboxes($id);
+            $data['financialChecks'] = $this->UserDataModel->get_checkboxes("studentFinancialAidAccess", $id, 3);
+            $data['reservedChecks'] = $this->UserDataModel->get_checkboxes("reservedAccess", $id, 4);
+            
+
             //passing data array to home view
             $this->load->view('home', $data);
-            
-            
 
            // print_r($data['records']);
             //print_r($this->session->userdata['username']);
@@ -56,6 +66,10 @@
 
             $careerType = ["UGRAD" => $undergraduate, "GRAD" => $graduate, "MED" => $medicine, "LAW" => $law, "VET" => $veterinarymedicine];
             $desc = $this->input->post('description');
+            $admissions = $this->get_admissions_value();
+            $students = $this->get_records_value();
+            $reserved = $this->get_reserved_value();
+            $financial = $this->get_financialAid_value();
             
             //this array is just used for testing...you can print this array to check all of the data if you want
             $allInfo = array( "FERPA" => $FERPA,"username" => $username, "pawprint" =>$pawprint, "empID" =>$emplID, "title" =>$title,
@@ -63,21 +77,17 @@
                 "zip" =>$zip, "phone" =>$phoneNumber, "studentWorker" =>$studentWorker, "requestType" =>$requestType,
                  "careerType" => $careerType, "staff" =>$staffMember, "former staff" =>$fstaffMember,
                 "staffName" =>$staffName, "staffPosition" =>$staffPosition,
-                "staffID" =>$staffID, "staffEmplID" =>$staffEmplID, "description" => $desc, "fname" => $fname, "lname" => $lname);
+                "staffID" =>$staffID, "staffEmplID" =>$staffEmplID, "description" => $desc, "fname" => $fname, "lname" => $lname,
+                "admissions" => $admissions, "students"=>$students, "reserved" => $reserved, "financial" => $financial);
             
             //testing...
             //print_r($allInfo);
             //print "$organization";
-                        
-            //these arrays are filled with data specific to the table that the data will be inserted into
-
-            $applicant = array("id"=>$pawprint, "isStudentWorker" => $studentWorker, "organization" => $organization);
-            $address = array("addID" => $pawprint, "city" => $city, "street" => $street, "zip" => $zip);
-            $ferpaScores = array("id" => $pawprint, "score" => $FERPA);
             
             //calling the insert_data function in the UserDataModel and passing it the arrays that can be used to insert
             //data into the corresponding table
             $this->load->model('UserDataModel');
+ 
             $this->UserDataModel->insert_data($allInfo);
             
             $this->load->view('success');
@@ -86,12 +96,12 @@
 
         }
 		
-		public function autoPop($employID){
-				$this->load->model('AppChoicesModel');
+        public function autoPop($employID){
+            $this->load->model('AppChoicesModel');
 
-				$person = $this->AppChoicesModel->get_person($employID);
-				$addrID = $person['addrID'];
-				$address = $this->AppChoicesModel->get_address($addrID);
+            $person = $this->AppChoicesModel->get_person($employID);
+            $addrID = $person['addrID'];
+            $address = $this->AppChoicesModel->get_address($addrID);
 
 
             $this->load->view('home', $person, $address);
@@ -113,6 +123,79 @@
             
             
             $this->load->view('pdfreport', $data);
+        }
+        
+        public function get_admissions_value(){
+            $this->load->model('UserDataModel');
+            $admissionsCountArray = $this->UserDataModel->count_admissions();
+            $admissionsCount = $admissionsCountArray[0]->value;
+            $a = 1;
+            $admissions = 0;
+            while($a <= $admissionsCount){
+                $admissions += $this->input->post("admissions$a");
+                $a++;
+                
+            }
+            
+            return $admissions;
+        }
+        
+        public function get_records_value(){
+            $this->load->model('UserDataModel');
+            $recordsCountArray = $this->UserDataModel->count_records();
+            $recordsCount = $recordsCountArray[0]->value;
+            $r = 1;
+            $recordsV = 0;
+            $recordsU = 0;
+            while($r <= $recordsCount){
+                $recordsU += $this->input->post("studentupdate$r");
+                $recordsV += $this->input->post("studentview$r");
+                $r++;
+                
+            }
+            
+            return $recordsV + $recordsU;
+        }
+        
+        public function get_reserved_value(){
+            $this->load->model('UserDataModel');
+            $reservedCountArray = $this->UserDataModel->count_reserved();
+            $reservedCount = $reservedCountArray[0]->value;
+            $begIDArray = $this->UserDataModel->reserved_BegID();
+            $begID = $begIDArray[0]->roleID;
+            $reservedV = 0;
+            $reservedU = 0;
+            
+            $re=0;
+            while($re <= $reservedCount){
+                $reservedU += $this->input->post("reservedupdate$begID");
+                $reservedV += $this->input->post("reservedview$begID");
+                $re++;
+                $begID++;
+                
+            }
+            
+            return $reservedV + $reservedU;
+        }
+        
+        public function get_financialAid_value(){
+            $this->load->model('UserDataModel');
+            $financialCountArray = $this->UserDataModel->count_financialAid();
+            $financialCount = $financialCountArray[0]->value;
+            $fbegIDArray = $this->UserDataModel->financial_BegID();
+            $fbegID = $fbegIDArray[0]->roleID;
+            $fi = 0;
+            $financialV = 0;
+            $financialU = 0;
+            while($fi < $financialCount){
+                $financialU += $this->input->post("financialupdate$fbegID");
+                $financialV += $this->input->post("financialview$fbegID");
+                $fi++;
+                $fbegID++;
+                
+            }
+            
+            return $financialV + $financialU;
         }
        
     }
