@@ -53,16 +53,22 @@
                         <th>Status</th>
                     </tr>
                     <?php
+
+
                     //    foreach($requests as $req){
                     //        print $req->appID . " ";
                     //        print $req->id . " ";
                     //        print $req->desc . " ";
                     //        print "<br>";
                     //    }
+
+
                         foreach($requests as $req){
                             if($req->status==1) $status = "Pending";
                             elseif($req->status==2) $status = "Accepted";
                             else $status = "Not submitted yet";
+
+
                             print "<tr><td><a href=\"".base_url()."index.php/ViewRequestController?applicantID=".$req->id."\" class=\"btn btn-primary\">Select</a>". "</td>";
                             print "<td>" .$req->id."</td>";
                             print "<td>" .$req->description."</td>";

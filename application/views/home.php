@@ -80,23 +80,25 @@
   <link href="<?php echo base_url();?>/assets/css/bootstrap.slate.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="<?php echo base_url();?>/assets/js/bootstrap.js"></script>
+  <script src="<?php echo base_url();?>/assets/js/jquery.maskedinput.js"></script>
   <script src="<?php echo base_url();?>/assets/js/FormValidation.js"></script>
   
   <script>
     $(function(){
-       console.log("JACK! THIS WORK"); 
+       //console.log("JACK! THIS WORK"); 
     });
   </script>
 </head>
 
 <body>
   <div class="container">
-    <?php echo anchor('LogoutController', 'Logout'); ?>
+    <?php echo "<a href=\"".base_url()."index.php/LogoutController\" class=\"btn btn-primary\">Logout</a>";?>
+
     <div class="jumbotron">
       <h1>myZou SECURITY Request Form</h1>
       <p>University of Missouri, Columbia</p>
       <!-- TODO: add popup modal with instructions when button is selected-->
-      <p><a class="btn btn-primary btn-lg">Instructions</a></p>
+      <p><a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Instructions</a></p>
     </div>
 
      <!-- Modal -->
@@ -213,12 +215,12 @@
                 <div class="form-group">
                   <label for="title" class="col-lg-3 control-label">Title</label>
                   <div class="col-lg-9">
-                    <input type="text" value="<?php print $title; ?>" name="title" class="form-control" id="title" placeholder="title">
+                    <input required type="text" value="<?php print $title; ?>" name="title" class="form-control" id="title" placeholder="title">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="organization" class="col-lg-3 control-label">Academic Organization (Department)</label>
-                  <div class="col-lg-9">
+                  <div class="col-lg-9">            
                     <!--<input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->                         
 <!--                      <input type="text" name="organization" class="form-control" id="organization" placeholder="organization">-->
                            <?php
@@ -238,7 +240,7 @@
                     <div class="form-group">
                       <label for="street2" class="col-lg-3 control-label">Street</label>
                       <div class="col-lg-9">
-                          <input type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
+                          <input required type="text" name="street" class="form-control" id="street" placeholder="street" value="<?php echo $theStreet; ?>">
                       </div>
                       <div class="col-lg-3"></div>
                       <div class="col-lg-9">
@@ -271,7 +273,7 @@
                 <div class="form-group">
                   <label for="studentWorker" class="col-lg-3 control-label">I am a student worker</label>
                   <div class="col-lg-9">
-                    <input type="checkbox" name="studentWorker" class="form-control" id="studentWorker" <?php print $isStudentWorker ? "checked" : "" ?>>
+                    <input required type="checkbox" name="studentWorker" class="form-control" id="studentWorker" <?php print $isStudentWorker ? "checked" : "" ?>>
                   </div>
                 </div>
               </div>

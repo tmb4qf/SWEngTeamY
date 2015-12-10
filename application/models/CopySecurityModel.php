@@ -70,21 +70,21 @@
 			if ($admTests->num_rows() > 0){
 			   foreach ($admTests as $row)
 			   {
-					$this->UserDataModel->insert_admissionsTestRequests($appID, $row->admTypeID)
+					$this->UserDataModel->insert_admissionsTestRequests($appID, $row->admTypeID);
 			   }
 			}
 			//There could be more than one role checked
 			if ($roles->num_rows() > 0){
 			   foreach ($roles as $row)
 			   {
-					$this->UserDataModel->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest)
+					$this->UserDataModel->insert_roleAccessRequest($appID, $row->roleId, $row->isViewRequest, $row->isUpdateRequest);
 			   }
 			}
 			//There could be more than one career checked 
 			if ($careers->num_rows() > 0){
 			   foreach ($careers as $row)
 			   {
-					$this->UserDataModel->insert_requestedCareerTypes($appID, $emplID, $row->typeID)
+					$this->UserDataModel->insert_requestedCareerTypes($appID, $emplID, $row->typeID);
 			   }
 			}
 		}
